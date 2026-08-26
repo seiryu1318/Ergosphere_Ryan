@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#07100f">
-  <title>라이언의 대입 포털 ver.20260814 - 01</title>
+  <meta name="theme-color" content="#06110e">
+  <title>라이언의 대입 포털 ver.20260826 - 03</title>
   <style>
     :root {
       --bg: #040a09;
@@ -848,6 +848,858 @@
       .resource-card:hover,
       .resource-card:focus-visible { transform: none; }
     }
+
+    /* 2026-08-26 readability and layout refinement */
+    :root {
+      --muted: #a8c5ba;
+      --dim: #718d82;
+      --content: 1320px;
+    }
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--green-bright);
+      outline-offset: 3px;
+    }
+    .site-header {
+      border-color: rgba(180, 255, 225, .18);
+      background: linear-gradient(110deg, rgba(5, 20, 15, .94), rgba(10, 12, 27, .92));
+    }
+    .brand-copy strong { font-size: 15px; }
+    .brand-copy span { font-size: 10px; color: #8dffc9; }
+    .live-status { font-size: 11px; color: #a9c8bc; }
+    .view-toggle { font-size: 11px; }
+    .hero {
+      min-height: 390px;
+      background:
+        linear-gradient(100deg, rgba(4, 17, 13, .08), rgba(8, 13, 28, .48)),
+        radial-gradient(circle at 88% 20%, rgba(133, 108, 255, .2), transparent 31%),
+        radial-gradient(circle at 67% 115%, rgba(72, 235, 167, .2), transparent 38%),
+        linear-gradient(128deg, rgba(8, 34, 25, .91), rgba(11, 10, 29, .88));
+    }
+    .hero-copy { max-width: 920px; }
+    .hero h1 { max-width: 860px; font-size: clamp(42px, 5.3vw, 70px); line-height: 1.03; }
+    .password-note { font-size: 13px; letter-spacing: -.015em; }
+    .hero-link { min-height: 48px; padding-inline: 19px; font-size: 13px; }
+    .section-head { align-items: flex-end; }
+    .section-title-group { display: grid; gap: 8px; }
+    .section-eyebrow {
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .16em;
+    }
+    .section-title-group p {
+      max-width: 620px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+    .resource-count {
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #b8d5c9;
+      background: rgba(255,255,255,.025);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      white-space: nowrap;
+    }
+    .resource-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; }
+    .resource-card { grid-column: span 2; min-height: 316px; }
+    .resource-card:nth-last-child(-n+2) { grid-column: span 3; }
+    .resource-card:nth-child(5) { --accent: var(--blue); }
+    .card-preview { height: 150px; }
+    .card-preview img { object-position: center top; }
+    .card-copy { padding: 19px 19px 58px; }
+    .card-copy h3 { font-size: clamp(19px, 1.65vw, 23px); }
+    .card-copy p { margin-top: 10px; font-size: 13px; line-height: 1.65; }
+    .access-badge { min-height: 25px; font-size: 10px; }
+    .access-badge.is-new {
+      border-color: rgba(127, 188, 255, .35);
+      color: #cce4ff;
+      background: rgba(82, 158, 255, .11);
+    }
+    .access-badge.is-new::before { background: var(--blue); box-shadow: 0 0 10px rgba(127,188,255,.85); }
+    .projects-panel h2 { font-size: clamp(29px, 3vw, 40px); }
+    .project-row h3 { font-size: clamp(16px, 1.45vw, 19px); }
+    .project-row span { font-size: 10px; color: #b0cbbf; }
+    footer { font-size: 11px; }
+    @media (max-width: 1100px) {
+      .resource-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .resource-card,
+      .resource-card:nth-last-child(-n+2) { grid-column: auto; }
+      .resource-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+      .card-preview { height: 180px; }
+    }
+    @media (max-width: 760px) {
+      .brand-copy strong { font-size: 13px; }
+      .brand-copy span { font-size: 8px; }
+      .hero,
+      body.mode-mobile .hero { min-height: 0; padding: 42px 26px 44px; }
+      .hero h1 { font-size: clamp(35px, 10.6vw, 47px); line-height: 1.07; }
+      .password-note { align-items: flex-start; font-size: 12px; line-height: 1.55; }
+      .section-head { align-items: flex-start; flex-direction: column; gap: 14px; }
+      .section-title-group p { font-size: 12px; }
+      .resource-count { font-size: 9px; }
+      .resource-grid { grid-template-columns: 1fr; }
+      .resource-card,
+      .resource-card:nth-last-child(-n+2),
+      .resource-card:last-child:nth-child(odd) { grid-column: auto; min-height: 306px; }
+      .card-preview { height: 166px; }
+      .card-copy h3 { font-size: 21px; }
+      .card-copy p { font-size: 12.5px; }
+      .project-row h3 { font-size: 16px; }
+    }
+    @media (max-width: 390px) {
+      .hero h1 { font-size: 34px; }
+      .resource-card { min-height: 296px; }
+      .card-preview { height: 154px; }
+    }
+    @media (prefers-contrast: more) {
+      :root { --line: rgba(205,255,235,.34); --muted: #c5ddd3; }
+      .resource-card, .dashboard-section, .projects-panel { border-color: var(--line); }
+    }
+
+    /* Autumn full-screen portal */
+    body {
+      color: #fff;
+      background: #21170e;
+    }
+    body::before,
+    body::after {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      content: "";
+    }
+    body::before {
+      z-index: 0;
+      background: url("배경화면(가을).jpg") center / cover no-repeat;
+      transform: scale(1.025);
+    }
+    body::after {
+      z-index: 0;
+      background:
+        linear-gradient(180deg, rgba(19,14,10,.42), rgba(15,12,10,.14) 38%, rgba(16,12,9,.52)),
+        radial-gradient(circle at 18% 42%, rgba(124,68,19,.12), transparent 42%);
+    }
+    .cosmos { display: none !important; }
+    .site { z-index: 1; min-height: 100%; }
+    .site-header,
+    body.mode-mobile .site-header {
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      z-index: 60;
+      width: min(calc(100% - 28px), 1320px);
+      min-height: 62px;
+      margin: 0;
+      padding: 7px 9px;
+      border-color: rgba(255,255,255,.24);
+      border-radius: 16px;
+      background: rgba(18,16,13,.34);
+      box-shadow: 0 16px 45px rgba(0,0,0,.18), inset 0 1px rgba(255,255,255,.08);
+      backdrop-filter: blur(18px) saturate(1.08);
+      transform: translateX(-50%);
+    }
+    .site-header::after { display: none; }
+    .brand img { border-color: rgba(255,255,255,.54); box-shadow: 0 7px 20px rgba(0,0,0,.18); }
+    .brand-copy strong { color: #fff; text-shadow: 0 1px 12px rgba(0,0,0,.38); }
+    .brand-copy span { color: rgba(255,255,255,.72); }
+    .live-status { display: none; }
+    .view-toggle {
+      border-color: rgba(255,255,255,.34);
+      color: #fff;
+      background: rgba(255,255,255,.08);
+      box-shadow: inset 0 1px rgba(255,255,255,.08);
+      backdrop-filter: blur(10px);
+    }
+    .view-toggle b { color: #fff; }
+    .view-toggle:hover,
+    .view-toggle:focus-visible { border-color: rgba(255,255,255,.72); background: rgba(255,255,255,.17); }
+    .legacy-content,
+    .site > footer { display: none !important; }
+    .portal-experience { position: relative; z-index: 2; }
+    .portal-section {
+      position: relative;
+      min-height: 100svh;
+      overflow: hidden;
+    }
+    .hero-screen {
+      display: grid;
+      place-items: center;
+      padding: 112px 7vw 176px;
+    }
+    .hero-screen::after,
+    .roadmap-screen::after {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(90deg, rgba(16,12,9,.38), rgba(16,12,9,.08) 50%, rgba(16,12,9,.32));
+      content: "";
+    }
+    .portal-stage {
+      position: relative;
+      width: min(100%, 1060px);
+      text-align: center;
+    }
+    .portal-title {
+      margin: 0 auto clamp(40px, 7vh, 72px);
+      color: #fff;
+      font-size: clamp(18px, 4.7vw, 62px);
+      font-weight: 950;
+      letter-spacing: -.065em;
+      line-height: 1;
+      text-shadow: 0 4px 30px rgba(0,0,0,.38);
+      white-space: nowrap;
+    }
+    .portal-slider { position: relative; min-height: 250px; }
+    .portal-slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(16px);
+      transition: transform .38s ease, visibility 0s linear .38s;
+    }
+    .portal-slide.is-active { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+    .slide-panel {
+      position: relative;
+      width: min(100%, 720px);
+      min-height: 230px;
+      padding: 35px 40px 34px;
+      border: 1px solid rgba(255,255,255,.24);
+      border-radius: 26px;
+      background: rgba(27,21,16,.22);
+      box-shadow: 0 25px 70px rgba(0,0,0,.19), inset 0 1px rgba(255,255,255,.09);
+      backdrop-filter: blur(13px) saturate(1.08);
+    }
+    .portal-slide.is-new .slide-panel {
+      border-color: rgba(255,220,139,.92);
+      animation: new-border-glow 2.2s ease-in-out infinite;
+    }
+    .slide-number {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      margin-bottom: 16px;
+      padding: 0 9px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 999px;
+      color: rgba(255,255,255,.86);
+      background: rgba(255,255,255,.06);
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: .08em;
+    }
+    .new-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 27px;
+      margin: 0 0 16px 7px;
+      padding: 0 10px;
+      border: 1px solid rgba(255,223,144,.92);
+      border-radius: 999px;
+      color: #fff2cc;
+      background: rgba(255,191,77,.1);
+      box-shadow: 0 0 18px rgba(255,195,77,.45), inset 0 0 12px rgba(255,204,107,.1);
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: .12em;
+    }
+    .portal-slide h2 {
+      margin: 0;
+      font-size: clamp(29px, 4.5vw, 52px);
+      font-weight: 950;
+      letter-spacing: -.055em;
+      line-height: 1.08;
+      text-shadow: 0 3px 22px rgba(0,0,0,.32);
+      word-break: keep-all;
+    }
+    .portal-slide p {
+      max-width: 560px;
+      margin: 13px auto 0;
+      color: rgba(255,255,255,.82);
+      font-size: 14px;
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+    .glass-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-width: 146px;
+      min-height: 48px;
+      margin-top: 24px;
+      padding: 0 18px;
+      border: 1px solid rgba(255,255,255,.62);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(255,255,255,.08);
+      box-shadow: inset 0 1px rgba(255,255,255,.13), 0 12px 30px rgba(0,0,0,.14);
+      backdrop-filter: blur(11px);
+      font-size: 13px;
+      font-weight: 900;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .glass-action:hover,
+    .glass-action:focus-visible { transform: translateY(-2px); border-color: #fff; background: rgba(255,255,255,.18); }
+    .portal-arrow {
+      position: absolute;
+      top: 62%;
+      z-index: 6;
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      border: 1px solid rgba(255,255,255,.48);
+      border-radius: 50%;
+      color: #fff;
+      background: rgba(18,15,12,.14);
+      box-shadow: inset 0 1px rgba(255,255,255,.1);
+      backdrop-filter: blur(12px);
+      cursor: pointer;
+      font-size: 24px;
+      transition: transform .18s ease, background .18s ease;
+    }
+    .portal-arrow:hover,
+    .portal-arrow:focus-visible { transform: scale(1.06); background: rgba(255,255,255,.17); }
+    .portal-arrow.prev { left: max(18px, 4vw); }
+    .portal-arrow.next { right: max(18px, 4vw); }
+    .slide-status {
+      position: absolute;
+      left: 50%;
+      bottom: 132px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255,255,255,.86);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .12em;
+      transform: translateX(-50%);
+    }
+    .slide-dots { display: flex; gap: 7px; }
+    .slide-dots i { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.4); transition: width .2s ease, background .2s ease; }
+    .slide-dots i.is-active { width: 21px; border-radius: 999px; background: #fff; }
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      z-index: 55;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(112px, 1fr));
+      width: min(calc(100% - 32px), 960px);
+      padding: 7px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 18px;
+      background: rgba(16,14,12,.43);
+      box-shadow: 0 16px 52px rgba(0,0,0,.25), inset 0 1px rgba(255,255,255,.07);
+      backdrop-filter: blur(20px) saturate(1.05);
+      transform: translateX(-50%);
+    }
+    .bottom-nav a {
+      display: grid;
+      place-items: center;
+      min-height: 52px;
+      padding: 0 12px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      color: rgba(255,255,255,.82);
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.25;
+      text-align: center;
+      word-break: keep-all;
+      transition: border-color .18s ease, background .18s ease, color .18s ease;
+    }
+    .bottom-nav a:hover,
+    .bottom-nav a:focus-visible,
+    .bottom-nav a[aria-current="page"] { border-color: rgba(255,255,255,.58); color: #fff; background: rgba(255,255,255,.11); }
+    .bottom-nav a.is-new { border-color: rgba(255,218,129,.54); box-shadow: inset 0 0 14px rgba(255,199,76,.08), 0 0 14px rgba(255,189,55,.1); }
+    .scroll-control {
+      position: fixed;
+      left: max(18px, 3vw);
+      bottom: 34px;
+      z-index: 56;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 40px;
+      padding: 0 13px;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(18,15,12,.24);
+      box-shadow: 0 10px 30px rgba(0,0,0,.17), inset 0 1px rgba(255,255,255,.08);
+      backdrop-filter: blur(12px);
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 850;
+      transition: background .18s ease, transform .18s ease;
+    }
+    .scroll-control:hover,
+    .scroll-control:focus-visible { background: rgba(255,255,255,.14); transform: translateY(-2px); }
+    .scroll-control .scroll-arrow { font-size: 15px; animation: scroll-float 1.7s ease-in-out infinite; }
+    .roadmap-screen {
+      display: flex;
+      align-items: center;
+      padding: 138px max(28px, 5vw) 150px;
+    }
+    .roadmap-screen::after { background: linear-gradient(180deg, rgba(18,13,10,.53), rgba(18,13,10,.3) 40%, rgba(13,10,8,.68)); }
+    .roadmap-wrap { width: min(100%, 1280px); margin: 0 auto; }
+    .roadmap-heading { max-width: 880px; margin-bottom: clamp(32px, 6vh, 60px); }
+    .roadmap-heading h2 {
+      margin: 0;
+      font-size: clamp(42px, 6vw, 78px);
+      font-weight: 950;
+      letter-spacing: -.065em;
+      line-height: 1;
+      text-shadow: 0 5px 30px rgba(0,0,0,.34);
+    }
+    .roadmap-heading p { margin: 17px 0 0; color: rgba(255,255,255,.82); font-size: 15px; line-height: 1.75; }
+    .roadmap-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+    .roadmap-card {
+      position: relative;
+      min-height: 270px;
+      padding: 28px 26px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 18px;
+      color: #211710;
+      background: rgba(255,252,247,.76);
+      box-shadow: 0 22px 55px rgba(0,0,0,.2), inset 0 1px rgba(255,255,255,.68);
+      backdrop-filter: blur(12px) saturate(.92);
+    }
+    .roadmap-card.is-new { border-color: #ffd36d; animation: new-card-glow 2.2s ease-in-out infinite; }
+    .roadmap-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 29px;
+      padding: 0 10px;
+      border-radius: 6px;
+      color: #fff;
+      background: #8c5824;
+      font-size: 10px;
+      font-weight: 950;
+    }
+    .roadmap-badge.new { background: #d57c15; box-shadow: 0 0 14px rgba(220,127,18,.3); }
+    .roadmap-card h3 { margin: 20px 0 0; font-size: 20px; line-height: 1.55; letter-spacing: -.035em; word-break: keep-all; }
+    .roadmap-date { position: absolute; left: 26px; bottom: 25px; color: rgba(33,23,16,.52); font-size: 12px; }
+    .roadmap-number { position: absolute; right: 23px; bottom: 18px; color: rgba(33,23,16,.18); font-size: 40px; font-weight: 900; }
+    .roadmap-credit { margin: 24px 2px 0; color: rgba(255,255,255,.64); font-size: 10px; }
+    @keyframes new-border-glow {
+      50% { border-color: #fff0b5; box-shadow: 0 0 0 4px rgba(255,207,91,.08), 0 0 34px rgba(255,183,39,.5), inset 0 1px rgba(255,255,255,.18); }
+    }
+    @keyframes new-card-glow {
+      50% { box-shadow: 0 0 0 4px rgba(255,207,91,.12), 0 0 35px rgba(255,181,35,.42), 0 22px 55px rgba(0,0,0,.2); }
+    }
+    @keyframes scroll-float { 50% { transform: translateY(4px); } }
+    @media (max-width: 1120px) {
+      .roadmap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .scroll-control { bottom: 96px; }
+    }
+    @media (max-width: 760px) {
+      .site-header,
+      body.mode-mobile .site-header {
+        top: 8px;
+        width: calc(100% - 16px);
+        min-height: 58px;
+        margin: 0;
+        border-radius: 14px;
+      }
+      .brand img { width: 41px; height: 41px; }
+      .brand-copy strong { font-size: 12px; }
+      .brand-copy span { display: block; font-size: 7px; }
+      .view-toggle { min-height: 34px; padding-inline: 9px; font-size: 8px; }
+      .hero-screen { padding: 94px 20px 174px; }
+      .portal-title { margin-bottom: 38px; font-size: clamp(15px, 4.7vw, 38px); }
+      .portal-slider { min-height: 310px; }
+      .slide-panel { min-height: 286px; padding: 31px 22px 28px; border-radius: 21px; }
+      .portal-slide h2 { font-size: clamp(28px, 9vw, 39px); }
+      .portal-slide p { font-size: 12px; }
+      .portal-arrow { top: auto; bottom: 124px; width: 45px; height: 45px; font-size: 20px; }
+      .portal-arrow.prev { left: 20px; }
+      .portal-arrow.next { right: 20px; }
+      .slide-status { bottom: 133px; }
+      .bottom-nav {
+        left: 8px;
+        right: 8px;
+        bottom: 8px;
+        display: flex;
+        width: auto;
+        padding: 6px;
+        overflow-x: auto;
+        border-radius: 15px;
+        transform: none;
+        scrollbar-width: none;
+      }
+      .bottom-nav::-webkit-scrollbar { display: none; }
+      .bottom-nav a { flex: 0 0 auto; min-width: 104px; min-height: 46px; padding-inline: 10px; font-size: 10px; }
+      .scroll-control { left: 12px; bottom: 70px; min-height: 36px; font-size: 10px; }
+      .roadmap-screen { padding: 116px 18px 150px; }
+      .roadmap-heading h2 { font-size: clamp(40px, 13vw, 58px); }
+      .roadmap-heading p { font-size: 13px; }
+      .roadmap-grid {
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: min(82vw, 330px);
+        gap: 12px;
+        margin-right: -18px;
+        padding-right: 18px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+      }
+      .roadmap-grid::-webkit-scrollbar { display: none; }
+      .roadmap-card { min-height: 265px; scroll-snap-align: start; }
+    }
+    @media (max-width: 390px) {
+      .brand-copy strong { font-size: 11px; }
+      .portal-title { font-size: clamp(14px, 4.6vw, 17px); }
+      .slide-panel { padding-inline: 18px; }
+      .portal-slide h2 { font-size: 28px; }
+      .glass-action { min-width: 132px; }
+    }
+
+    /* Interaction, alignment and dedicated mobile mode */
+    html { scroll-snap-type: y mandatory; }
+    .portal-section { scroll-snap-align: start; scroll-snap-stop: always; }
+    .portal-title { font-size: clamp(30px, 5.1vw, 72px); }
+    .portal-slider { min-height: 290px; }
+    .slide-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 270px;
+      text-align: center;
+    }
+    .slide-number { margin-bottom: 15px; }
+    .new-badge { margin: -42px 0 15px 58px; }
+    .portal-slide h2 { font-size: clamp(36px, 4.7vw, 60px); }
+    .portal-slide p { font-size: 16px; line-height: 1.72; }
+    .glass-action {
+      min-width: 158px;
+      min-height: 52px;
+      border-color: rgba(255,255,255,.72);
+      background: rgba(255,255,255,.06);
+      font-size: 15px;
+    }
+    button.glass-action { cursor: pointer; font-family: inherit; }
+    .portal-arrow {
+      top: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 29px;
+      line-height: 1;
+      transform: translateY(-50%);
+    }
+    .portal-arrow:hover,
+    .portal-arrow:focus-visible { transform: translateY(-50%) scale(1.06); }
+    .bottom-nav a { font-size: 13px; }
+    .scroll-control {
+      right: max(18px, 3vw);
+      left: auto;
+      font-size: 12px;
+    }
+    .roadmap-card h3 { font-size: 23px; }
+    .roadmap-credit { text-align: center; font-size: 11px; }
+    .gate button {
+      border-color: rgba(255,255,255,.62);
+      color: #fff;
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 12px 30px rgba(0,0,0,.18), inset 0 1px rgba(255,255,255,.12);
+      backdrop-filter: blur(12px);
+    }
+    .gate button:hover,
+    .gate button:focus-visible { background: rgba(255,255,255,.18); filter: none; }
+
+    body.mode-mobile .portal-experience {
+      width: min(100%, 480px);
+      margin-inline: auto;
+      box-shadow: 0 0 80px rgba(0,0,0,.3);
+    }
+    body.mode-mobile .site-header {
+      top: 8px;
+      width: min(calc(100% - 16px), 464px);
+      min-height: 58px;
+      margin: 0;
+    }
+    body.mode-mobile .hero-screen { padding: 94px 16px 168px; }
+    body.mode-mobile .portal-stage { width: 100%; }
+    body.mode-mobile .portal-title {
+      margin-bottom: 38px;
+      font-size: clamp(15px, 4.7vw, 21px);
+    }
+    body.mode-mobile .portal-slider { min-height: 332px; }
+    body.mode-mobile .slide-panel {
+      width: calc(100% - 70px);
+      min-height: 304px;
+      padding: 32px 21px 30px;
+      border-radius: 22px;
+    }
+    body.mode-mobile .portal-slide h2 { font-size: clamp(28px, 8.4vw, 36px); }
+    body.mode-mobile .portal-slide p { font-size: 14px; }
+    body.mode-mobile .glass-action { min-width: 148px; min-height: 54px; font-size: 14px; }
+    body.mode-mobile .portal-arrow {
+      top: 50%;
+      bottom: auto;
+      width: 47px;
+      height: 47px;
+      transform: translateY(-50%);
+    }
+    body.mode-mobile .portal-arrow:hover,
+    body.mode-mobile .portal-arrow:focus-visible { transform: translateY(-50%) scale(1.04); }
+    body.mode-mobile .portal-arrow.prev { left: 8px; }
+    body.mode-mobile .portal-arrow.next { right: 8px; }
+    body.mode-mobile .slide-status { bottom: 126px; }
+    body.mode-mobile .bottom-nav {
+      right: auto;
+      bottom: 8px;
+      display: flex;
+      width: min(calc(100% - 16px), 464px);
+      overflow-x: auto;
+      transform: translateX(-50%);
+      scrollbar-width: none;
+    }
+    body.mode-mobile .bottom-nav::-webkit-scrollbar { display: none; }
+    body.mode-mobile .bottom-nav a {
+      flex: 0 0 auto;
+      min-width: 106px;
+      min-height: 50px;
+      font-size: 11px;
+    }
+    body.mode-mobile .scroll-control {
+      right: max(12px, calc((100vw - 464px) / 2 + 12px));
+      bottom: 71px;
+      min-height: 38px;
+      font-size: 10px;
+    }
+    body.mode-mobile .roadmap-screen { padding: 116px 18px 150px; }
+    body.mode-mobile .roadmap-heading h2 { font-size: clamp(40px, 11vw, 56px); }
+    body.mode-mobile .roadmap-heading p { font-size: 14px; }
+    body.mode-mobile .roadmap-grid {
+      grid-template-columns: none;
+      grid-auto-flow: column;
+      grid-auto-columns: min(82vw, 330px);
+      gap: 12px;
+      margin-right: -18px;
+      padding-right: 18px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+    body.mode-mobile .roadmap-grid::-webkit-scrollbar { display: none; }
+    body.mode-mobile .roadmap-card { min-height: 280px; scroll-snap-align: start; }
+
+    @media (max-width: 760px) {
+      .portal-title { font-size: clamp(15px, 4.7vw, 36px); }
+      .portal-slider { min-height: 332px; }
+      .slide-panel { width: calc(100% - 70px); min-height: 304px; }
+      .portal-slide h2 { font-size: clamp(30px, 8.8vw, 40px); }
+      .portal-slide p { font-size: 14px; }
+      .glass-action { min-height: 54px; font-size: 14px; }
+      .portal-arrow { top: 50%; bottom: auto; transform: translateY(-50%); }
+      .portal-arrow:hover,
+      .portal-arrow:focus-visible { transform: translateY(-50%) scale(1.04); }
+      .portal-arrow.prev { left: 8px; }
+      .portal-arrow.next { right: 8px; }
+      .scroll-control { right: 12px; left: auto; }
+      .roadmap-card h3 { font-size: 22px; }
+      .roadmap-credit { text-align: center; }
+    }
+    @media (max-width: 390px) {
+      .portal-title { font-size: clamp(14px, 4.55vw, 17px); }
+      .portal-slide h2 { font-size: 29px; }
+      .portal-slide p { font-size: 13px; }
+      .bottom-nav a { min-width: 101px; }
+    }
+
+    /* Full-section snap and seasonal cross-fade */
+    .spring-background {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: url("배경화면(봄).jpg") center / cover no-repeat;
+      opacity: 0;
+      transform: scale(1.02);
+      transition: opacity .9s cubic-bezier(.22,.7,.25,1);
+      will-change: opacity;
+    }
+    body.is-roadmap .spring-background { opacity: 1; }
+    .portal-stage {
+      transition: transform .62s cubic-bezier(.22,.7,.25,1);
+    }
+    .hero-screen .portal-arrow,
+    .hero-screen .slide-status {
+      transition: opacity .62s ease, transform .62s cubic-bezier(.22,.7,.25,1);
+    }
+    body.is-roadmap .portal-stage { transform: translateY(-18px); pointer-events: none; }
+    body.is-roadmap .hero-screen .portal-arrow,
+    body.is-roadmap .hero-screen .slide-status { opacity: 0; pointer-events: none; }
+    .roadmap-wrap {
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .72s ease .08s, transform .72s cubic-bezier(.22,.7,.25,1) .08s;
+      will-change: opacity, transform;
+    }
+    body.is-roadmap .roadmap-wrap { opacity: 1; transform: none; }
+    body:not(.is-roadmap) .roadmap-wrap { pointer-events: none; }
+    body.is-section-transitioning .site-header,
+    body.is-section-transitioning .bottom-nav,
+    body.is-section-transitioning .scroll-control { transition: opacity .35s ease, background .35s ease; }
+
+    /* Directional chevrons without circular buttons */
+    .portal-arrow,
+    body.mode-mobile .portal-arrow {
+      top: 50%;
+      width: 72px;
+      height: 96px;
+      padding: 0;
+      border: 0 !important;
+      border-radius: 0;
+      color: #fff;
+      background: transparent !important;
+      box-shadow: none !important;
+      backdrop-filter: none;
+      filter: drop-shadow(0 3px 10px rgba(0,0,0,.55));
+      font-family: Arial, sans-serif;
+      font-size: 68px;
+      font-weight: 300;
+      line-height: 1;
+    }
+    .portal-arrow.prev,
+    body.mode-mobile .portal-arrow.prev {
+      left: max(12px, 3vw);
+      animation: chevron-left 1.35s ease-in-out infinite;
+    }
+    .portal-arrow.next,
+    body.mode-mobile .portal-arrow.next {
+      right: max(12px, 3vw);
+      animation: chevron-right 1.35s ease-in-out infinite;
+    }
+    .portal-arrow:hover,
+    .portal-arrow:focus-visible,
+    body.mode-mobile .portal-arrow:hover,
+    body.mode-mobile .portal-arrow:focus-visible {
+      background: transparent !important;
+      filter: drop-shadow(0 4px 14px rgba(255,255,255,.38));
+    }
+    @keyframes chevron-left {
+      0%, 100% { transform: translate3d(0,-50%,0); }
+      50% { transform: translate3d(-12px,-50%,0); }
+    }
+    @keyframes chevron-right {
+      0%, 100% { transform: translate3d(0,-50%,0); }
+      50% { transform: translate3d(12px,-50%,0); }
+    }
+    @media (max-width: 760px) {
+      .portal-arrow,
+      body.mode-mobile .portal-arrow {
+        width: 48px;
+        height: 78px;
+        font-size: 52px;
+      }
+      .portal-arrow.prev,
+      body.mode-mobile .portal-arrow.prev { left: 2px; }
+      .portal-arrow.next,
+      body.mode-mobile .portal-arrow.next { right: 2px; }
+    }
+
+    /* Seasonal password gate */
+    .gate {
+      background:
+        linear-gradient(180deg, rgba(20,13,8,.48), rgba(18,12,8,.62)),
+        rgba(18,12,8,.34);
+      backdrop-filter: blur(16px) saturate(.82);
+    }
+    .gate-card {
+      width: min(100%, 410px);
+      padding: 36px 34px 31px;
+      border: 1px solid rgba(255,231,197,.5);
+      border-radius: 24px;
+      background:
+        linear-gradient(145deg, rgba(66,41,24,.68), rgba(28,24,23,.72)),
+        rgba(34,25,19,.5);
+      box-shadow: 0 30px 95px rgba(0,0,0,.46), 0 0 55px rgba(232,145,57,.12), inset 0 1px rgba(255,255,255,.12);
+      backdrop-filter: blur(22px) saturate(1.05);
+    }
+    .gate-card::before { display: none; }
+    .gate-icon {
+      display: grid;
+      place-items: center;
+      width: 84px;
+      height: 84px;
+      margin: 0 auto 20px;
+      padding: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(255,238,211,.76);
+      border-radius: 50%;
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 12px 35px rgba(0,0,0,.23), 0 0 24px rgba(255,180,83,.22), inset 0 1px rgba(255,255,255,.7);
+    }
+    .gate-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .gate-card h2 { color: #fff; font-size: 25px; text-shadow: 0 2px 16px rgba(0,0,0,.28); }
+    .gate-card > p { color: rgba(255,244,230,.76); font-size: 13px; }
+    .password-field input {
+      border-color: rgba(255,229,194,.48);
+      color: #fff;
+      background: rgba(21,15,11,.36);
+      box-shadow: inset 0 1px rgba(255,255,255,.04);
+    }
+    .password-field input::placeholder { color: rgba(255,238,218,.48); }
+    .password-field input:focus {
+      border-color: #ffd29a;
+      box-shadow: 0 0 0 4px rgba(255,184,93,.12), 0 0 28px rgba(255,157,54,.12);
+    }
+    .password-field span { color: #ffd29a; }
+    .gate button {
+      border-color: rgba(255,236,211,.7);
+      color: #fff;
+      background: rgba(255,255,255,.07);
+      box-shadow: 0 12px 30px rgba(0,0,0,.18), inset 0 1px rgba(255,255,255,.12);
+    }
+    .gate button:hover,
+    .gate button:focus-visible { border-color: #fff; background: rgba(255,255,255,.16); }
+    @media (max-width: 480px) {
+      .gate-card { padding: 31px 24px 27px; border-radius: 21px; }
+      .gate-icon { width: 74px; height: 74px; margin-bottom: 18px; }
+      .gate-card h2 { font-size: 23px; }
+    }
+
+    .slide-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 28px;
+      margin-bottom: 16px;
+    }
+    .slide-meta .slide-number,
+    .slide-meta .new-badge {
+      margin: 0;
+      flex: 0 0 auto;
+    }
   </style>
 </head>
 <body class="locked mode-pc">
@@ -865,13 +1717,15 @@
     <i class="shooting-star" style="--x:94%;--size:130px;--speed:6.4s;--delay:4.7s"></i>
   </div>
 
+  <div class="spring-background" aria-hidden="true"></div>
+
   <div class="site">
     <header class="site-header shell">
       <a class="brand" href="#top" aria-label="라이언의 대입 포털 홈">
         <img src="data:image/jpeg;base64,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" alt="라이언 캐릭터">
         <span class="brand-copy">
           <strong>라이언의 대입 포털</strong>
-          <span>ver.20260814 - 01</span>
+          <span>ver.20260826 - 03</span>
         </span>
       </a>
       <div class="header-actions">
@@ -882,18 +1736,123 @@
       </div>
     </header>
 
-    <main id="top">
+    <main id="top" class="portal-experience">
+      <section class="portal-section hero-screen" aria-labelledby="portalTitle">
+        <div class="portal-stage">
+          <h1 class="portal-title" id="portalTitle">진학을 위한 입시 인사이트</h1>
+          <div class="portal-slider" id="portalSlider" aria-live="polite">
+            <article class="portal-slide is-active" aria-hidden="false">
+              <div class="slide-panel">
+                <span class="slide-number">01</span>
+                <h2>라이언의 대입 포털</h2>
+                <p>필요한 입시 정보와 진학 도구를 한곳에서 탐색하세요.</p>
+                <button class="glass-action" id="exploreButton" type="button">자료 둘러보기 <span aria-hidden="true">→</span></button>
+              </div>
+            </article>
+            <article class="portal-slide" aria-hidden="true">
+              <div class="slide-panel">
+                <span class="slide-number">02</span>
+                <h2>21–26 입시결과</h2>
+                <p>연도·대학·전형·계열별 입시 결과를 조건에 맞게 탐색합니다.</p>
+                <a class="glass-action" href="https://seiryu1318.github.io/admission_Ryan/" target="_blank" rel="noopener noreferrer">바로 가기 <span aria-hidden="true">↗</span></a>
+              </div>
+            </article>
+            <article class="portal-slide" aria-hidden="true">
+              <div class="slide-panel">
+                <span class="slide-number">03</span>
+                <h2>5등급–9등급 변환</h2>
+                <p>5등급 성적을 9등급 기준으로 빠르고 쉽게 환산합니다.</p>
+                <a class="glass-action" href="https://seiryu1318.github.io/5rating_Ryan/" target="_blank" rel="noopener noreferrer">바로 가기 <span aria-hidden="true">↗</span></a>
+              </div>
+            </article>
+            <article class="portal-slide is-new" aria-hidden="true">
+              <div class="slide-panel">
+                <div class="slide-meta"><span class="slide-number">04</span><span class="new-badge">NEW</span></div>
+                <h2>라이언의 의약학 문단속</h2>
+                <p>의·치·한·약·수의대학 입시 자료를 연도와 전형에 따라 탐색합니다.</p>
+                <a class="glass-action" href="https://seiryu1318.github.io/medical_Ryan/" target="_blank" rel="noopener noreferrer">바로 가기 <span aria-hidden="true">↗</span></a>
+              </div>
+            </article>
+            <article class="portal-slide" aria-hidden="true">
+              <div class="slide-panel">
+                <span class="slide-number">05</span>
+                <h2>AI HUB · 입시 패들렛</h2>
+                <p>전형·대학·진학 자료와 AI 활용 정보를 한곳에서 확인합니다.</p>
+                <a class="glass-action" href="https://padlet.com/seiryu1318/admission-insight-hub-3vmodlyqo1xu1x7f" target="_blank" rel="noopener noreferrer">바로 가기 <span aria-hidden="true">↗</span></a>
+              </div>
+            </article>
+          </div>
+        </div>
+        <button class="portal-arrow prev" id="prevSlide" type="button" aria-label="이전 자료">‹</button>
+        <button class="portal-arrow next" id="nextSlide" type="button" aria-label="다음 자료">›</button>
+        <div class="slide-status" aria-hidden="true">
+          <span id="slideCounter">1 / 5</span>
+          <span class="slide-dots" id="slideDots"><i class="is-active"></i><i></i><i></i><i></i><i></i></span>
+        </div>
+      </section>
+
+      <section class="portal-section roadmap-screen" id="roadmap" aria-labelledby="roadmapTitle">
+        <div class="roadmap-wrap">
+          <div class="roadmap-heading">
+            <h2 id="roadmapTitle">업데이트 로드맵</h2>
+            <p>자료는 더 정확하게, 탐색은 더 쉽게. 다음 업데이트를 차례로 준비하고 있습니다.</p>
+          </div>
+          <div class="roadmap-grid">
+            <article class="roadmap-card is-new">
+              <span class="roadmap-badge new">NEW</span>
+              <h3>의약학 문단속<br>정식 공개</h3>
+              <span class="roadmap-date">2026.08.26</span><span class="roadmap-number">1</span>
+            </article>
+            <article class="roadmap-card">
+              <span class="roadmap-badge">개선 중</span>
+              <h3>최신 입시 자료<br>자동 업데이트</h3>
+              <span class="roadmap-date">2026.09</span><span class="roadmap-number">2</span>
+            </article>
+            <article class="roadmap-card">
+              <span class="roadmap-badge">준비 중</span>
+              <h3>좋은 기록이란<br>무엇일까?</h3>
+              <span class="roadmap-date">예정</span><span class="roadmap-number">3</span>
+            </article>
+            <article class="roadmap-card">
+              <span class="roadmap-badge">준비 중</span>
+              <h3>가이드북<br>통합 검색기</h3>
+              <span class="roadmap-date">예정</span><span class="roadmap-number">4</span>
+            </article>
+          </div>
+          <p class="roadmap-credit">Copyright © 2026 동대부속고 라이언</p>
+        </div>
+      </section>
+
+      <nav class="bottom-nav" aria-label="빠른 이동">
+        <a href="#top" data-slide-index="0" aria-current="page">홈 화면</a>
+        <a href="#top" data-slide-index="1">21–26 입결</a>
+        <a href="#top" data-slide-index="2">5등급 변환</a>
+        <a class="is-new" href="#top" data-slide-index="3">의약학 문단속</a>
+        <a href="#top" data-slide-index="4">AI HUB(입시 패들렛)</a>
+      </nav>
+
+      <button class="scroll-control" id="scrollControl" type="button" aria-label="업데이트 로드맵으로 스크롤">
+        <span class="scroll-label">스크롤 내리기</span><span class="scroll-arrow" aria-hidden="true">↓</span>
+      </button>
+    </main>
+
+    <main class="legacy-content" aria-hidden="true">
       <section class="hero shell">
         <div class="hero-copy">
-          <h1>본교 구성원을 위한<br><span>입시 가이드</span></h1>
-          <p class="password-note">비밀번호는 개별 질문</p>
+          <h1>진학을 위한<br><span>입시 인사이트</span></h1>
+          <p class="password-note">본교 구성원 전용 · 비밀번호는 개별 문의</p>
           <br>
           <a class="hero-link" href="#resources">자료 보기 <span aria-hidden="true">↓</span></a>
         </div>
       </section>
 
       <section class="section shell dashboard-section" id="resources">
-        <div class="section-head"><h2>입시 자료</h2></div>
+        <div class="section-head">
+          <div class="section-title-group">
+            <h2>입시 자료</h2>
+            <p>성적부터 학교생활기록부, 의약학 진학 정보까지 필요한 도구를 한곳에 모았습니다.</p>
+          </div>
+        </div>
         <div class="resource-grid">
           <a class="resource-card" data-update-repo="seiryu1318/admission_Ryan" data-update-baseline="14eb656cbe27fd9e4db65f95268edf3f07f42807" href="https://seiryu1318.github.io/admission_Ryan/" target="_blank" rel="noreferrer">
             <span class="update-badge" aria-hidden="true">UPDATE</span>
@@ -918,14 +1877,20 @@
             <div class="card-copy"><h3>진학 정보 DB</h3><span class="access-badge">추가 비밀번호 필요</span><p>전형·대학·진학 자료를 한곳에서 확인합니다.</p></div>
             <span class="card-open" aria-hidden="true">↗</span>
           </a>
+          <a class="resource-card" data-update-repo="seiryu1318/medical_Ryan" href="https://seiryu1318.github.io/medical_Ryan/" target="_blank" rel="noopener noreferrer">
+            <span class="update-badge" aria-hidden="true">UPDATE</span>
+            <div class="card-preview"><img src="assets/medical_Ryan_thumbnail.png" alt="라이언의 의약학 문단속 검색 화면" loading="lazy" decoding="async"><span class="card-number">05</span></div>
+            <div class="card-copy"><h3>라이언의 의약학 문단속</h3><span class="access-badge is-new">새 자료</span><p>의·치·한·약·수의대학 입시 결과를 연도·전형·계열별로 탐색합니다.</p></div>
+            <span class="card-open" aria-hidden="true">↗</span>
+          </a>
         </div>
       </section>
 
       <section class="section shell" id="projects">
         <div class="projects-panel">
-          <h2>진행 중인 프로젝트</h2>
+          <h2>업데이트 로드맵</h2>
           <div class="project-list">
-            <article class="project-row"><h3>의약학계열 통합 가이드 검색기</h3><span>개선 중</span></article>
+            <article class="project-row"><h3>의약학 문단속 자료 확장</h3><span>운영 중</span></article>
             <article class="project-row"><h3>좋은 기록이란 무엇일까?</h3><span>준비 중</span></article>
             <article class="project-row"><h3>가이드북 통합 검색기</h3><span>준비 중</span></article>
           </div>
@@ -941,7 +1906,7 @@
 
   <div class="gate" id="gate" role="presentation">
     <section class="gate-card" role="dialog" aria-modal="true" aria-labelledby="gateTitle" aria-describedby="gateDescription">
-      <div class="gate-icon" aria-hidden="true">R</div>
+      <div class="gate-icon"><img src="assets/gom.jpg" alt="라이언 캐릭터"></div>
       <h2 id="gateTitle">라이언의 대입 포털</h2>
       <p id="gateDescription">안내받은 비밀번호를 입력해 주세요.</p>
       <form id="passwordForm">
@@ -990,8 +1955,7 @@
         storage.set(VIEW_KEY, mode);
       }
 
-      const savedMode = storage.get(VIEW_KEY);
-      applyMode(savedMode === "mobile" || savedMode === "pc" ? savedMode : (matchMedia("(max-width: 760px)").matches ? "mobile" : "pc"));
+      applyMode("pc");
 
       toggle.addEventListener("click", () => applyMode(body.classList.contains("mode-mobile") ? "pc" : "mobile"));
 
@@ -1027,7 +1991,7 @@
 
       input.addEventListener("input", () => { error.textContent = ""; });
 
-      const updateCards = [...document.querySelectorAll("[data-update-repo]")];
+      const updateCards = [...document.querySelectorAll(".portal-experience [data-update-repo]")];
       let updateCheckRunning = false;
       let lastUpdateCheck = 0;
 
@@ -1101,6 +2065,116 @@
         body.classList.toggle("page-hidden", hidden);
         if (!hidden) checkForUpdates();
       });
+
+      const portalSlides = [...document.querySelectorAll(".portal-slide")];
+      const portalSlider = document.getElementById("portalSlider");
+      const previousSlide = document.getElementById("prevSlide");
+      const nextSlide = document.getElementById("nextSlide");
+      const slideCounter = document.getElementById("slideCounter");
+      const slideDots = [...document.querySelectorAll("#slideDots i")];
+      const slideNav = document.querySelector(".bottom-nav");
+      const slideNavItems = [...document.querySelectorAll(".bottom-nav [data-slide-index]")];
+      const exploreButton = document.getElementById("exploreButton");
+      let activeSlide = 0;
+
+      function showSlide(index) {
+        if (!portalSlides.length) return;
+        activeSlide = (index + portalSlides.length) % portalSlides.length;
+        portalSlides.forEach((slide, slideIndex) => {
+          const isActive = slideIndex === activeSlide;
+          slide.classList.toggle("is-active", isActive);
+          slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+        });
+        slideDots.forEach((dot, dotIndex) => dot.classList.toggle("is-active", dotIndex === activeSlide));
+        slideNavItems.forEach((item, itemIndex) => {
+          if (itemIndex === activeSlide) item.setAttribute("aria-current", "page");
+          else item.removeAttribute("aria-current");
+        });
+        const activeNavItem = slideNavItems[activeSlide];
+        if (activeNavItem && slideNav && slideNav.scrollWidth > slideNav.clientWidth) {
+          const left = activeNavItem.offsetLeft - (slideNav.clientWidth - activeNavItem.clientWidth) / 2;
+          slideNav.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
+        }
+        if (slideCounter) slideCounter.textContent = (activeSlide + 1) + " / " + portalSlides.length;
+      }
+
+      previousSlide?.addEventListener("click", () => showSlide(activeSlide - 1));
+      nextSlide?.addEventListener("click", () => showSlide(activeSlide + 1));
+      exploreButton?.addEventListener("click", () => showSlide(1));
+      slideNavItems.forEach((item) => {
+        item.addEventListener("click", (event) => {
+          event.preventDefault();
+          showSlide(Number(item.dataset.slideIndex));
+          moveToSection(document.getElementById("top"));
+        });
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.target instanceof HTMLInputElement || event.target instanceof HTMLButtonElement) return;
+        if (event.key === "ArrowLeft") showSlide(activeSlide - 1);
+        if (event.key === "ArrowRight") showSlide(activeSlide + 1);
+        if (event.key === "PageDown") { event.preventDefault(); moveToSection(roadmap); }
+        if (event.key === "PageUp") { event.preventDefault(); moveToSection(document.getElementById("top")); }
+      });
+
+      let touchStartX = null;
+      portalSlider?.addEventListener("touchstart", (event) => {
+        touchStartX = event.changedTouches[0].clientX;
+      }, { passive: true });
+      portalSlider?.addEventListener("touchend", (event) => {
+        if (touchStartX === null) return;
+        const distance = event.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(distance) > 42) showSlide(activeSlide + (distance < 0 ? 1 : -1));
+        touchStartX = null;
+      }, { passive: true });
+
+      const scrollControl = document.getElementById("scrollControl");
+      const scrollLabel = scrollControl?.querySelector(".scroll-label");
+      const scrollArrow = scrollControl?.querySelector(".scroll-arrow");
+      const roadmap = document.getElementById("roadmap");
+      const topSection = document.getElementById("top");
+      let sectionTransitionTimer = 0;
+
+      function setRoadmapVisuals(active) {
+        body.classList.toggle("is-roadmap", active);
+      }
+
+      function moveToSection(target) {
+        if (!target) return;
+        body.classList.add("is-section-transitioning");
+        setRoadmapVisuals(target === roadmap);
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.clearTimeout(sectionTransitionTimer);
+        sectionTransitionTimer = window.setTimeout(() => {
+          body.classList.remove("is-section-transitioning");
+          syncScrollControl();
+        }, 920);
+      }
+
+      function syncScrollControl() {
+        const shouldGoUp = window.scrollY > Math.max(180, window.innerHeight * .44);
+        if (scrollLabel) scrollLabel.textContent = shouldGoUp ? "스크롤 올리기" : "스크롤 내리기";
+        if (scrollArrow) scrollArrow.textContent = shouldGoUp ? "↑" : "↓";
+        scrollControl?.setAttribute("aria-label", shouldGoUp ? "홈 화면으로 스크롤" : "업데이트 로드맵으로 스크롤");
+        if (!body.classList.contains("is-section-transitioning")) setRoadmapVisuals(shouldGoUp);
+      }
+
+      scrollControl?.addEventListener("click", () => {
+        const shouldGoUp = window.scrollY > Math.max(180, window.innerHeight * .44);
+        moveToSection(shouldGoUp ? topSection : roadmap);
+      });
+      let wheelLocked = false;
+      window.addEventListener("wheel", (event) => {
+        if (body.classList.contains("locked") || Math.abs(event.deltaX) > Math.abs(event.deltaY) || Math.abs(event.deltaY) < 12) return;
+        event.preventDefault();
+        if (wheelLocked) return;
+        wheelLocked = true;
+        moveToSection(event.deltaY > 0 ? roadmap : topSection);
+        window.setTimeout(() => { wheelLocked = false; }, 920);
+      }, { passive: false });
+      window.addEventListener("scroll", syncScrollControl, { passive: true });
+      window.addEventListener("resize", syncScrollControl);
+      syncScrollControl();
+      showSlide(0);
     })();
   </script>
 </body>
