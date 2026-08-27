@@ -1,8 +1,9 @@
-const CACHE_NAME = "ryan-admission-portal-20260827-04";
+const CACHE_NAME = "ryan-admission-portal-20260827-05";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
+  "./og-preview-20260827-05.jpg",
   "./icons/icon-192.png",
   "./icons/icon-512.png"
 ];
