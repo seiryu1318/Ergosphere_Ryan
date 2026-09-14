@@ -1,4 +1,4 @@
-const CACHE_NAME = "ryan-admission-portal-20260914-05";
+const CACHE_NAME = "ryan-admission-portal-20260915-01";
 const APP_SHELL = [
   "./index.html",
   "./manifest.webmanifest",
