@@ -1,0 +1,40 @@
+name: Check linked project publications
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/refresh-project-updates.yml'
+      - 'scripts/refresh_project_updates.py'
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-project-updates
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Read successful Pages publications
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/refresh_project_updates.py
+      - name: Publish changed dates
+        run: |
+          git add -- project-updates.json
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Refresh linked project publication dates'
+          git push origin HEAD:main
