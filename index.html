@@ -30,7 +30,7 @@
   <meta name="twitter:title" content="진학 인사이트">
   <meta name="twitter:description" content="입시 정보와 진학 도구를 한곳에서 확인하세요.">
   <meta name="twitter:image" content="https://seiryu1318.github.io/Ergosphere_Ryan/og-preview-20260827-05.jpg">
-  <title>라이언의 대입 포털 ver.20261118 - 02</title>
+  <title>라이언의 대입 포털 ver.20261118 - 03</title>
   <script>
     (() => {
       if ("scrollRestoration" in history) history.scrollRestoration = "manual";
@@ -2547,6 +2547,11 @@
       backdrop-filter: none;
     }
     .roadmap-wrap { will-change: auto; }
+    .roadmap-card.in-reading-band,
+    .mobile-roadmap-item.in-reading-band {
+      color: #153e52;
+      background: linear-gradient(115deg, #e4f4f8f5, #c8e2eaf0 62%, #e9efebef);
+    }
     /* iOS WebKit can omit cards or miscalculate long-list height with content-visibility. */
     .mobile-menu-item,
     .mobile-roadmap-item { content-visibility: visible; }
@@ -2646,23 +2651,6 @@
       display: grid;
       align-content: center;
       min-height: min(560px, 66svh);
-    }
-    .portal-kicker {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      margin: 0 0 clamp(18px, 3vh, 28px);
-      color: var(--winter-intro-copy);
-      font-size: clamp(10px, .8vw, 13px);
-      font-weight: 850;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-    }
-    .portal-kicker::before {
-      width: clamp(36px, 5vw, 72px);
-      height: 1px;
-      background: currentColor;
-      content: "";
     }
     body.mode-pc .portal-title {
       max-width: 1120px;
@@ -3103,7 +3091,7 @@
       transform: none;
     }
     body.mode-pc .bottom-nav .scroll-arrow {
-      font-size: 15px;
+      font-size: 10px;
       animation: none;
     }
 
@@ -3458,9 +3446,7 @@
       font-size: clamp(66px, 10.6vw, 154px);
       line-height: .92;
     }
-    .portal-kicker,
     .portal-lead { color: rgba(246,251,255,.94); text-shadow: 0 2px 12px rgba(3,18,31,.62); }
-    .portal-kicker { font-size: clamp(11px, .86vw, 14px); }
     .portal-lead { max-width: 620px; font-size: clamp(16px, 1.16vw, 19px); font-weight: 650; }
 
     body.mode-pc .bottom-nav {
@@ -3612,32 +3598,44 @@
     body.mode-mobile .mobile-section-title { font-size: clamp(27px, 7.7vw, 36px); }
     body.mode-mobile .mobile-roadmap-item strong { font-size: clamp(15px, 4.1vw, 18px); }
 
-    .gate-card {
-      border-radius: 0;
-      background: linear-gradient(145deg, rgba(10,31,48,.9), rgba(7,21,34,.94));
-      box-shadow: 0 30px 80px rgba(1,12,21,.42), inset 0 1px rgba(255,255,255,.16);
-      backdrop-filter: blur(22px) saturate(120%);
-      -webkit-backdrop-filter: blur(22px) saturate(120%);
+    .gate {
+      background: linear-gradient(150deg, rgba(26,45,55,.09), rgba(15,34,48,.28));
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
     }
-    .gate-card::after,
-    .gate-icon,
-    .password-field input,
-    #passwordForm button { border-radius: 0; }
+    .gate-card {
+      border: 0;
+      border-radius: 26px;
+      background: linear-gradient(145deg, rgba(73,95,106,.68), rgba(27,52,66,.76) 53%, rgba(34,56,66,.72));
+      box-shadow: 0 22px 68px rgba(12,29,39,.25);
+      backdrop-filter: blur(15px) saturate(110%);
+      -webkit-backdrop-filter: blur(15px) saturate(110%);
+    }
+    .gate-card::before, .gate-card::after { content: none; }
+    .gate-icon {
+      width: 66px; height: 66px; padding: 0; border: 0; border-radius: 50%;
+      background: transparent; box-shadow: 0 6px 16px rgba(9,26,37,.26);
+      backdrop-filter: none; -webkit-backdrop-filter: none;
+    }
+    .gate-card .password-field input, #passwordForm button {
+      border: 0; border-radius: 5px; backdrop-filter: none; -webkit-backdrop-filter: none;
+    }
     .password-field input {
       border-color: rgba(196,229,251,.3);
       color: #fff;
       background: rgba(235,246,252,.1);
     }
-    .password-field input:focus,
-    .password-field input:not(:placeholder-shown) {
-      border-color: #79c8ff;
+    .gate-card .password-field input:focus,
+    .gate-card .password-field input:not(:placeholder-shown) {
       color: #fff;
-      background: rgba(2,16,27,.88);
-      box-shadow: 0 0 0 3px rgba(83,181,241,.14), inset 0 1px rgba(255,255,255,.07);
+      background: rgba(13,34,46,.82);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(206,234,246,.27);
     }
     #passwordForm button {
-      background: linear-gradient(135deg, #44afea, #146da7 56%, #0a496f);
-      box-shadow: inset 0 1px rgba(255,255,255,.25), 0 12px 26px rgba(3,22,36,.28);
+      color: #102c3a;
+      background: linear-gradient(115deg, #d5e8eb, #a7cbd5);
+      box-shadow: 0 5px 16px rgba(3,22,36,.14);
     }
 
     .portal-modal {
@@ -3702,17 +3700,32 @@
     .renewal-list { display: grid; gap: 10px; margin: 18px 0 0; padding: 0; list-style: none; }
     .renewal-list li { position: relative; padding: 13px 16px 13px 36px; border-left: 2px solid #58beff; background: rgba(255,255,255,.045); font-size: 16px; font-weight: 750; }
     .renewal-list li::before { position: absolute; top: 19px; left: 16px; width: 7px; height: 7px; border-radius: 50%; background: #58beff; box-shadow: 0 0 12px rgba(88,190,255,.8); content: ""; }
-    .guide-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .guide-tab { min-height: 52px; padding: 8px 12px; background: rgba(255,255,255,.055); }
-    .guide-panel { display: none; padding-top: 20px; }
+    #helpModal .portal-modal-card {
+      width: min(760px,100%); overflow: hidden; display: flex; flex-direction: column;
+      border: 0; border-radius: 18px; background: linear-gradient(135deg,#234255,#10293b 62%,#102233);
+    }
+    #helpModal .portal-modal-header { flex: none; padding-bottom: 0; border: 0; }
+    #helpModal .portal-modal-body { display: flex; flex-direction: column; min-height: 0; gap: 16px; }
+    .guide-tabs { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 3px; padding: 4px; border-radius: 13px; background: #0c2232; }
+    .guide-tab { min-height: 44px; padding: 4px; border: 0; border-radius: 9px; background: transparent; color: #cbdfe8; box-shadow: none; }
+    .guide-tab:hover, .guide-tab:focus-visible, .guide-tab[aria-selected="true"] { background: linear-gradient(110deg,#346782,#2c536b); color: white; }
+    .guide-tab:focus-visible, .guide-panel:focus-visible { outline: 2px solid #a5deff; outline-offset: -2px; }
+    .guide-panel { display: none; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #4d7487 transparent; }
     .guide-panel.is-active { display: block; }
-    .guide-steps { display: grid; gap: 13px; margin: 0; padding: 0; list-style: none; counter-reset: guide-step; }
-    .guide-steps li { position: relative; min-height: 42px; padding: 10px 12px 10px 48px; color: rgba(238,248,255,.9); background: rgba(255,255,255,.045); font-size: 15px; line-height: 1.58; counter-increment: guide-step; }
-    .guide-steps li::before { position: absolute; top: 10px; left: 11px; display: grid; place-items: center; width: 26px; height: 26px; color: #061c2d; background: #83d3ff; content: counter(guide-step); font-size: 12px; font-weight: 950; }
-    .guide-shot { margin: 0 0 18px; border: 1px solid rgba(205,235,255,.24); background: rgba(2,15,25,.52); }
-    .guide-shot img { display: block; width: 100%; height: auto; }
-    .guide-shot figcaption { padding: 9px 12px; color: rgba(219,238,250,.72); font-size: 12px; }
-    body.modal-open { overflow: hidden; }
+    .guide-steps { display: grid; gap: 4px; margin: 0 0 14px; padding: 0; list-style: none; counter-reset: guide-step; }
+    .guide-steps li { position: relative; padding: 10px 12px 10px 38px; border-radius: 8px; color: #e1edf3; font-size: 16px; line-height: 1.6; counter-increment: guide-step; }
+    .guide-steps li::before { position: absolute; left: 12px; top: 13px; color: #b2ccda; content: counter(guide-step, decimal-leading-zero); font: 600 12px/1.6 system-ui,sans-serif; }
+    .guide-steps .reading { background: linear-gradient(90deg,#45758b54,transparent); }
+    .guide-steps .reading strong { color: #b7e7ff; }
+    .guide-devices li { padding-left: 12px; }
+    .guide-devices li::before { content: none; }
+    .guide-shot { margin: 0; }
+    .guide-shot img { display: block; width: 100%; height: auto; border-radius: 10px; }
+    #guidePanelMobile .guide-shot img { max-width: 300px; margin-inline: auto; }
+    #helpModal .portal-modal-actions { position: static; flex: none; margin: 0; padding: 0; background: transparent; }
+    #helpModalConfirm { border: 0; border-radius: 10px; background: linear-gradient(100deg,#366b84,#28536b); }
+    html.dialog-open, html.dialog-open body.modal-open { overflow: hidden !important; overscroll-behavior: none; }
+    .portal-modal-card, .guide-panel { overscroll-behavior: contain; }
 
     @media (max-width: 1180px) and (min-width: 761px) {
       body.mode-pc .bottom-nav { --dock-pad: 10px; --hub-track: minmax(148px, 1.05fr); --help-track: 92px; --roadmap-track: 118px; }
@@ -3742,7 +3755,7 @@
       .portal-modal-lead { font-size: 14px; }
       .renewal-list li { padding: 12px 12px 12px 32px; font-size: 14px; }
       .renewal-list li::before { left: 13px; }
-      .guide-tabs { grid-template-columns: 1fr; }
+      #helpModal .portal-modal-body { gap: 12px; }
       .guide-tab { min-height: 44px; }
       .guide-steps li { font-size: 14px; }
       .portal-modal-actions { position: sticky; bottom: 0; padding-top: 12px; background: linear-gradient(180deg, transparent, rgba(5,21,34,.98) 28%); }
@@ -3777,6 +3790,13 @@
       body.mode-pc .bottom-nav .nav-fixed[data-project] { grid-column: 2; }
       body.mode-pc .bottom-nav .scroll-control { grid-column: 3; }
     }
+    .help-launch .help-label { display: inline-flex; align-items: center; justify-content: center; gap: .5em; }
+    .help-symbol {
+      display: inline-grid; place-items: center; flex: none; width: 1.35em; height: 1.35em;
+      background: #cce7ef; color: #204659; border-radius: 50%; font: 700 .88em/1 system-ui;
+    }
+    body.mode-pc .bottom-nav .help-launch { padding-inline: 3px; }
+    body.mode-mobile .mobile-help-launch .help-label { justify-content: flex-start; }
   </style>
 </head>
 <body class="locked mode-pc">
@@ -3806,7 +3826,7 @@
         <img src="data:image/jpeg;base64,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" alt="라이언 캐릭터">
         <span class="brand-copy">
           <strong>라이언의 대입 포털</strong>
-          <span>ver.20261118 - 02</span>
+          <span>ver.20261118 - 03</span>
         </span>
       </a>
       <div class="header-actions">
@@ -3823,9 +3843,8 @@
     <main id="top" class="portal-experience">
       <section class="portal-section hero-screen" aria-labelledby="portalTitle">
         <div class="portal-stage portal-intro">
-          <p class="portal-kicker">Ryan Admission Portal</p>
           <h1 class="portal-title" id="portalTitle">진학 인사이트</h1>
-          <p class="portal-lead">입시 자료를 목적별 카테고리에서 한 번에 찾을 수 있습니다. 화면 아래 메뉴에 커서를 올리거나 키보드로 포커스해 전체 도구를 펼쳐 보세요.</p>
+          <p class="portal-lead">아래 메뉴에서 원하는 입시 자료를 골라 보세요.</p>
         </div>
       </section>
 
@@ -3896,8 +3915,8 @@
       </section>
 
       <nav class="bottom-nav" id="desktopCategoryDock" aria-label="입시 자료 카테고리" data-qa="desktop-category-bar">
-        <button class="help-launch nav-fixed" id="desktopHelpLaunch" type="button" aria-label="사용 방법 열기">
-          <span class="nav-label">사용 방법</span>
+        <button class="help-launch nav-fixed" id="desktopHelpLaunch" type="button" aria-label="사용 방법 열기" aria-haspopup="dialog" aria-controls="helpModal">
+          <span class="help-label"><span class="help-symbol" aria-hidden="true">?</span>사용 방법</span>
         </button>
         <a class="requires-password password-overlay-host nav-fixed" href="https://padlet.com/seiryu1318/admission-insight-hub-3vmodlyqo1xu1x7f" target="_blank" rel="noopener noreferrer" data-project="ai-hub" data-qa="ai-hub" aria-describedby="desktopHubPasswordHint">
           <span class="nav-label password-primary">AI-HUB 입시 Padlet</span>
@@ -3962,7 +3981,7 @@
           </div>
         </section>
         <button class="scroll-control" id="scrollControl" type="button" aria-label="업데이트 내역으로 이동" aria-pressed="false" data-qa="roadmap-link">
-          <span class="scroll-label">업데이트 내역</span><span class="scroll-arrow" aria-hidden="true">↓</span>
+          <span class="scroll-label">업데이트 내역</span><span class="scroll-arrow" aria-hidden="true">▼</span>
         </button>
       </nav>
     </main>
@@ -3974,8 +3993,8 @@
 
       <section class="mobile-section mobile-menu-section">
         <nav class="mobile-menu-list" aria-label="입시 자료 바로가기">
-          <button class="mobile-menu-item mobile-help-launch help-launch" id="mobileHelpLaunch" type="button">
-            <span class="mobile-menu-copy"><span class="mobile-menu-head"><strong>사용 방법</strong></span></span>
+          <button class="mobile-menu-item mobile-help-launch help-launch" id="mobileHelpLaunch" type="button" aria-haspopup="dialog" aria-controls="helpModal">
+            <span class="mobile-menu-copy"><strong class="help-label"><span class="help-symbol" aria-hidden="true">?</span>사용 방법</strong></span>
             <span class="mobile-help-arrow" aria-hidden="true">→</span>
           </button>
           <a class="mobile-menu-item mobile-hub-link requires-password password-overlay-host" href="https://padlet.com/seiryu1318/admission-insight-hub-3vmodlyqo1xu1x7f" target="_blank" rel="noopener noreferrer" data-project="ai-hub" data-qa="ai-hub" aria-describedby="mobileHubPasswordHint">
@@ -4095,7 +4114,6 @@
   <div class="portal-modal" id="renewalNotice" role="presentation" aria-hidden="true">
     <section class="portal-modal-card renewal-modal-card" role="dialog" aria-modal="true" aria-labelledby="renewalNoticeTitle" aria-describedby="renewalNoticeLead">
       <header class="portal-modal-header">
-        <p class="portal-modal-kicker">RENEWAL NOTICE</p>
         <h2 id="renewalNoticeTitle">다음 프로젝트는 리뉴얼 중입니다.</h2>
         <p class="portal-modal-lead" id="renewalNoticeLead">11월 30일 마감 예정입니다.</p>
       </header>
@@ -4117,54 +4135,45 @@
   <div class="portal-modal" id="helpModal" role="presentation" aria-hidden="true">
     <section class="portal-modal-card" role="dialog" aria-modal="true" aria-labelledby="helpModalTitle">
       <header class="portal-modal-header">
-        <p class="portal-modal-kicker">PORTAL GUIDE</p>
         <h2 id="helpModalTitle">사용 방법</h2>
-        <p class="portal-modal-lead">필요한 안내를 고르면 화면과 함께 순서대로 볼 수 있습니다.</p>
       </header>
       <div class="portal-modal-body">
         <div class="guide-tabs" role="tablist" aria-label="사용 방법 선택">
-          <button class="guide-tab" type="button" role="tab" aria-selected="true" aria-controls="guidePanelBasic" id="guideTabBasic" data-guide-tab="basic">포털 사용 방법</button>
-          <button class="guide-tab" type="button" role="tab" aria-selected="false" aria-controls="guidePanelPc" id="guideTabPc" data-guide-tab="pc">PC 설치 방법</button>
-          <button class="guide-tab" type="button" role="tab" aria-selected="false" aria-controls="guidePanelMobile" id="guideTabMobile" data-guide-tab="mobile">모바일 앱 설치 방법</button>
+          <button class="guide-tab" type="button" role="tab" aria-selected="true" aria-controls="guidePanelBasic" id="guideTabBasic" data-guide-tab="basic">자료 찾기</button>
+          <button class="guide-tab" type="button" role="tab" aria-selected="false" tabindex="-1" aria-controls="guidePanelPc" id="guideTabPc" data-guide-tab="pc">PC 설치</button>
+          <button class="guide-tab" type="button" role="tab" aria-selected="false" tabindex="-1" aria-controls="guidePanelMobile" id="guideTabMobile" data-guide-tab="mobile">모바일 설치</button>
         </div>
 
         <section class="guide-panel is-active" id="guidePanelBasic" role="tabpanel" aria-labelledby="guideTabBasic" data-guide-panel="basic">
-          <figure class="guide-shot">
-            <img src="./assets/guide-portal.webp?v=20261118-02" width="1100" height="688" loading="lazy" decoding="async" alt="포털 아래쪽 메뉴에서 카테고리와 업데이트 내역을 선택하는 화면">
-            <figcaption>화면 아래쪽 메뉴에서 원하는 자료를 찾을 수 있습니다.</figcaption>
-          </figure>
           <ol class="guide-steps">
-            <li>화면 아래쪽에서 원하는 분류를 선택합니다.</li>
-            <li>펼쳐진 목록에서 자료 이름을 누르면 새 창으로 열립니다.</li>
-            <li>파란 점이 보이는 메뉴는 현재 내용을 손보고 있는 항목입니다.</li>
-            <li>업데이트 내역을 누르면 최근 변경 내용을 확인할 수 있습니다.</li>
+            <li>메뉴에서 <strong>원하는 분류</strong>를 고르세요.</li>
+            <li><strong>자료 이름</strong>을 누르면 새 창에서 열립니다.</li>
+            <li>최근 바뀐 내용은 <strong>업데이트 내역</strong>에서 확인하세요.</li>
           </ol>
+          <figure class="guide-shot">
+            <img src="./assets/guide-portal.webp?v=20261118-03" width="1100" height="290" loading="lazy" decoding="async" alt="포털 아래쪽 메뉴에서 카테고리와 업데이트 내역을 선택하는 화면">
+          </figure>
         </section>
 
         <section class="guide-panel" id="guidePanelPc" role="tabpanel" aria-labelledby="guideTabPc" data-guide-panel="pc" hidden>
-          <figure class="guide-shot">
-            <img src="./assets/guide-install-pc.webp?v=20261118-02" width="760" height="220" loading="lazy" decoding="async" alt="PC 화면 오른쪽 위의 앱 설치 버튼 위치">
-            <figcaption>PC에서는 화면 오른쪽 위의 앱 설치 버튼을 이용합니다.</figcaption>
-          </figure>
           <ol class="guide-steps">
-            <li>Chrome 또는 Edge로 포털을 엽니다.</li>
-            <li>화면 오른쪽 위에서 앱 설치를 누릅니다.</li>
-            <li>설치 창이 나타나면 설치를 선택합니다.</li>
-            <li>바탕 화면이나 시작 메뉴에서 라이언의 대입 포털을 실행합니다.</li>
+            <li><strong>Chrome이나 Edge</strong>에서 포털을 여세요.</li>
+            <li>오른쪽 위 <strong>앱 설치</strong>를 누르세요.</li>
+            <li>설치 창에서 <strong>설치</strong>를 선택하세요.</li>
           </ol>
+          <figure class="guide-shot">
+            <img src="./assets/guide-install-pc.webp?v=20261118-03" width="760" height="220" loading="lazy" decoding="async" alt="PC 화면 오른쪽 위의 앱 설치 버튼 위치">
+          </figure>
         </section>
 
         <section class="guide-panel" id="guidePanelMobile" role="tabpanel" aria-labelledby="guideTabMobile" data-guide-panel="mobile" hidden>
+          <ul class="guide-steps guide-devices">
+            <li><strong>안드로이드</strong><br>Chrome에서 포털을 열고 오른쪽 위 설치 아이콘을 누른 뒤 ‘설치’를 선택하세요.</li>
+            <li><strong>아이폰</strong><br>Safari에서 ‘공유’를 누르고 ‘홈 화면에 추가’를 선택한 뒤 ‘추가’를 누르세요.</li>
+          </ul>
           <figure class="guide-shot">
-            <img src="./assets/guide-install-mobile.webp?v=20261118-02" width="390" height="844" loading="lazy" decoding="async" alt="모바일 화면에서 포털을 앱으로 설치하는 위치와 순서">
-            <figcaption>Android는 앱 설치를 누르고 iPhone은 Safari 공유 메뉴를 사용합니다.</figcaption>
+            <img src="./assets/guide-install-mobile.webp?v=20261118-03" width="390" height="215" loading="lazy" decoding="async" alt="모바일 화면에서 포털을 앱으로 설치하는 위치와 순서">
           </figure>
-          <ol class="guide-steps">
-            <li>Android에서는 Chrome으로 포털을 열고 위쪽의 앱 설치를 누릅니다.</li>
-            <li>iPhone에서는 Safari로 포털을 열고 아래쪽의 공유 버튼을 누릅니다.</li>
-            <li>홈 화면에 추가를 선택한 뒤 추가를 누릅니다.</li>
-            <li>홈 화면에 생긴 아이콘을 누르면 포털이 바로 열립니다.</li>
-          </ol>
         </section>
 
         <div class="portal-modal-actions">
@@ -4227,7 +4236,7 @@
 
       if ("serviceWorker" in navigator && supportsPwaInstall) {
         window.addEventListener("load", () => {
-          navigator.serviceWorker.register("./service-worker.js?v=20261118-02", {
+          navigator.serviceWorker.register("./service-worker.js?v=20261118-03", {
             scope: "./",
             updateViaCache: "none"
           }).then((registration) => registration.update()).catch(() => {});
@@ -4262,6 +4271,8 @@
         modal.classList.add("is-open");
         modal.setAttribute("aria-hidden", "false");
         body.classList.add("modal-open");
+        document.documentElement.classList.add("dialog-open");
+        document.querySelector(".site").inert = true;
         window.setTimeout(() => (focusTarget || modal.querySelector("button"))?.focus({ preventScroll: true }), 40);
       }
 
@@ -4269,7 +4280,11 @@
         if (!modal) return;
         modal.classList.remove("is-open");
         modal.setAttribute("aria-hidden", "true");
-        if (!document.querySelector(".portal-modal.is-open")) body.classList.remove("modal-open");
+        if (!document.querySelector(".portal-modal.is-open")) {
+          body.classList.remove("modal-open");
+          document.documentElement.classList.remove("dialog-open");
+          document.querySelector(".site").inert = false;
+        }
         if (restoreFocus && lastModalFocus instanceof HTMLElement) lastModalFocus.focus({ preventScroll: true });
       }
 
@@ -4282,12 +4297,46 @@
         moveToSection(document.getElementById("top"));
       }
 
+      function highlightGuideStep(panel) {
+        const steps = panel.querySelectorAll(".guide-steps li");
+        const readingLine = panel.getBoundingClientRect().top + 28;
+        let current = steps[0];
+        for (const step of steps) {
+          if (step.getBoundingClientRect().top <= readingLine) current = step;
+        }
+        if (panel.scrollTop > 0 && panel.scrollTop + panel.clientHeight >= panel.scrollHeight - 1) {
+          current = steps[steps.length - 1];
+        }
+        steps.forEach((step) => step.classList.toggle("reading", step === current));
+      }
+
+      guidePanels.forEach((panel) => {
+        panel.tabIndex = 0;
+        let pending = false;
+        panel.addEventListener("scroll", () => {
+          if (pending) return;
+          pending = true;
+          requestAnimationFrame(() => {
+            pending = false;
+            if (!panel.hidden) highlightGuideStep(panel);
+          });
+        }, { passive: true });
+      });
+
       function selectGuidePanel(name) {
-        guideTabs.forEach((tab) => tab.setAttribute("aria-selected", tab.dataset.guideTab === name ? "true" : "false"));
+        guideTabs.forEach((tab) => {
+          const selected = tab.dataset.guideTab === name;
+          tab.setAttribute("aria-selected", String(selected));
+          tab.tabIndex = selected ? 0 : -1;
+        });
         guidePanels.forEach((panel) => {
           const active = panel.dataset.guidePanel === name;
           panel.classList.toggle("is-active", active);
           panel.hidden = !active;
+          if (active) {
+            panel.scrollTop = 0;
+            highlightGuideStep(panel);
+          }
         });
       }
 
@@ -4296,6 +4345,19 @@
         openPortalModal(helpModal, guideTabs[0]);
       }));
       guideTabs.forEach((tab) => tab.addEventListener("click", () => selectGuidePanel(tab.dataset.guideTab)));
+      helpModal.querySelector(".guide-tabs").addEventListener("keydown", (event) => {
+        const index = guideTabs.indexOf(event.target);
+        const next = {
+          ArrowLeft: (index + guideTabs.length - 1) % guideTabs.length,
+          ArrowRight: (index + 1) % guideTabs.length,
+          Home: 0,
+          End: guideTabs.length - 1
+        }[event.key];
+        if (index < 0 || next === undefined) return;
+        event.preventDefault();
+        selectGuidePanel(guideTabs[next].dataset.guideTab);
+        guideTabs[next].focus();
+      });
       helpModalConfirm?.addEventListener("click", () => {
         closePortalModal(helpModal, false);
         returnPortalHome();
@@ -4805,7 +4867,7 @@
           const label = scrollControl.querySelector(".scroll-label");
           const arrow = scrollControl.querySelector(".scroll-arrow");
           if (label) label.textContent = active ? "메뉴 복귀" : "업데이트 내역";
-          if (arrow) arrow.textContent = active ? "↑" : "↓";
+          if (arrow) arrow.textContent = active ? "▲" : "▼";
           scrollControl.setAttribute("aria-label", active ? "메뉴로 돌아가기" : "업데이트 내역으로 이동");
           scrollControl.setAttribute("aria-pressed", active ? "true" : "false");
         }
@@ -4846,15 +4908,37 @@
         moveToSection(body.classList.contains("is-roadmap") ? topSection : roadmap);
       });
       document.addEventListener("keydown", (event) => {
-        if (body.classList.contains("mode-mobile") || event.target.closest?.("input, button, a, textarea, select, summary")) return;
+        if (body.classList.contains("modal-open") || body.classList.contains("locked") || body.classList.contains("mode-mobile") || event.target.closest?.("input, button, a, textarea, select, summary")) return;
         if (event.key === "PageDown") { event.preventDefault(); moveToSection(roadmap); }
         if (event.key === "PageUp") { event.preventDefault(); moveToSection(topSection); }
       });
+      // Highlight the update row crossing the middle of the reading area.
+      const updateEntries = document.querySelectorAll(".roadmap-card, .mobile-roadmap-item");
+      let readingObserver;
+      let readingHeight;
+      function observeUpdateEntries() {
+        if (!("IntersectionObserver" in window) || readingHeight === window.innerHeight) return;
+        readingHeight = window.innerHeight;
+        readingObserver?.disconnect();
+        const topInset = Math.round(readingHeight * .4);
+        const bottomInset = Math.round(readingHeight * .55);
+        readingObserver = new IntersectionObserver((entries) => {
+          for (const entry of entries) {
+            entry.target.classList.toggle("in-reading-band", entry.isIntersecting);
+          }
+        }, { rootMargin: `-${topInset}px 0px -${bottomInset}px 0px` });
+        updateEntries.forEach((item) => readingObserver.observe(item));
+      }
+      observeUpdateEntries();
+      window.addEventListener("resize", observeUpdateEntries);
+
       let sectionWheelLocked = false;
       window.addEventListener("wheel", (event) => {
         if (body.classList.contains("locked") || body.classList.contains("mode-mobile")) return;
-        if (event.target.closest?.(".category-mega")) return;
+        if (body.classList.contains("modal-open") || event.target.closest?.(".category-mega")) return;
         if (Math.abs(event.deltaX) > Math.abs(event.deltaY) || Math.abs(event.deltaY) < 12) return;
+        // Once inside the update list, let the wheel reach every row.
+        if (roadmap.getBoundingClientRect().top <= 1 && (event.deltaY > 0 || roadmap.getBoundingClientRect().top < -1)) return;
         event.preventDefault();
         if (sectionWheelLocked) return;
         sectionWheelLocked = true;

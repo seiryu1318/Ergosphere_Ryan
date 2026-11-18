@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "ryan-admission-portal-";
-const CACHE_NAME = "ryan-admission-portal-20261118-02";
+const CACHE_NAME = "ryan-admission-portal-20261118-03";
 const SCOPE_URL = new URL(self.registration.scope);
 const INDEX_URL = new URL("./index.html", SCOPE_URL);
 const APP_SHELL = [
