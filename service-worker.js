@@ -1,10 +1,10 @@
 const CACHE_PREFIX = "ryan-admission-portal-";
-const CACHE_NAME = "ryan-admission-portal-20261119-02";
+const CACHE_NAME = "ryan-admission-portal-20261127-01";
 const SCOPE_URL = new URL(self.registration.scope);
 const INDEX_URL = new URL("./index.html", SCOPE_URL);
 const APP_SHELL = [
   "./index.html",
-  "./project-dots.js?v=20261119-02",
+  "./project-dots.js?v=20261127-01",
   "./project-updates.json",
   "./manifest.webmanifest",
   "./og-preview-20260827-05.jpg",
@@ -49,7 +49,7 @@ self.addEventListener("fetch", (event) => {
       const cache = await caches.open(CACHE_NAME);
       let response;
       try {
-        response = await fetch(event.request);
+        response = await fetch(event.request, { cache: "no-cache" });
       } catch {
         return (await cache.match(INDEX_URL.href)) || Response.error();
       }
