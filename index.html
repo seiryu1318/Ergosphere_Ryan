@@ -30,7 +30,7 @@
   <meta name="twitter:title" content="진학 인사이트">
   <meta name="twitter:description" content="입시 정보와 진학 도구를 한곳에서 확인하세요.">
   <meta name="twitter:image" content="https://seiryu1318.github.io/Ergosphere_Ryan/og-preview-20260827-05.jpg">
-  <title>라이언의 대입 포털 ver.20261127 - 05</title>
+  <title>라이언의 대입 포털 ver.20261127 - 06</title>
   <script>
     const tabletViewKey = "ryan-portal-tablet-view";
     const manualViewKey = "ryan-portal-manual-view";
@@ -3348,8 +3348,6 @@
         grid-row: 2;
       }
       .category-trigger { min-height: 42px; }
-      .category-trigger[data-category="references"],
-      .category-column[data-category-column="references"] { grid-column: span 2; }
       .category-mega {
         padding: 16px 0 18px;
       }
@@ -3733,6 +3731,20 @@
     .renewal-list { display: grid; gap: 10px; margin: 18px 0 0; padding: 0; list-style: none; }
     .renewal-list li { position: relative; padding: 13px 16px 13px 36px; border-left: 2px solid #58beff; background: rgba(255,255,255,.045); font-size: 16px; font-weight: 750; }
     .renewal-list li::before { position: absolute; top: 19px; left: 16px; width: 7px; height: 7px; border-radius: 50%; background: #58beff; box-shadow: 0 0 12px rgba(88,190,255,.8); content: ""; }
+    #interviewModal .portal-modal-card { width: min(100%, 440px); border: 0; border-radius: 16px; }
+    #interviewModal .portal-modal-actions { flex-wrap: wrap; }
+    #interviewModal .portal-modal-button { display: inline-grid; place-items: center; border-radius: 7px; }
+    #interviewModal .portal-modal-button:focus-visible { outline: 2px solid #cceaf9; outline-offset: 2px; }
+    #interviewModal [hidden] { display: none; }
+    #interviewPasswordLabel { display: block; margin-bottom: 8px; font-weight: 700; }
+    #interviewPassword {
+      width: 100%; min-height: 46px; padding: 10px 12px;
+      border: 1px solid #63899e; border-radius: 7px;
+      color: white; background: #0b2130; font: 600 16px/1.4 var(--font);
+    }
+    #interviewPassword:focus-visible { outline: 2px solid #acdbee; outline-offset: 2px; }
+    #interviewFeedback { margin: 10px 0 0; color: #ffe1ac; font-size: 14px; }
+    [data-interview-access] { width: 100%; font-family: inherit; text-align: left; cursor: pointer; }
     #helpModal .portal-modal-card {
       width: min(960px,100%); max-height: min(94svh,960px); overflow: hidden; display: flex; flex-direction: column;
       border: 0; border-radius: 18px; background: linear-gradient(135deg,#234255,#10293b 62%,#102233);
@@ -3831,7 +3843,7 @@
       .portal-modal,
       .portal-modal-card { transition: none; }
     }
-    body.mode-pc .bottom-nav { grid-template-columns: var(--help-track) var(--hub-track) minmax(0,7fr) var(--roadmap-track); }
+    body.mode-pc .bottom-nav { grid-template-columns: var(--help-track) var(--hub-track) minmax(0,8fr) var(--roadmap-track); }
     body.mode-mobile .mobile-hero::before { content: none; }
     body.mode-mobile .mobile-hero h1 { text-shadow: 0 1px 3px #283a47, 0 2px 8px #24374780; }
     body.mode-mobile .mobile-experience {
@@ -3845,7 +3857,6 @@
       gap: clamp(8px, 1.6vw, 14px);
       align-items: start;
     }
-    body.mode-mobile .mobile-menu-category[data-category="references"] { grid-column: 1 / -1; }
     body.mode-mobile .mobile-menu-list .mobile-menu-item {
       min-height: clamp(60px, 9vw, 72px);
       padding: 12px var(--menu-pad);
@@ -3917,7 +3928,7 @@
       margin: 0;
     }
     .mobile-hub-icon { width: 25px; height: 25px; flex: none; color: #c0e6d6; }
-    body.mode-mobile .mobile-menu-list a::after {
+    body.mode-mobile .mobile-menu-list :is(a, [data-interview-access])::after {
       content: "";
       width: 16px; height: 16px;
       justify-self: end;
@@ -3964,8 +3975,8 @@
     body.mode-mobile .mobile-help-launch .help-label { justify-content: flex-start; font-size: clamp(20px, 5vw, 24px); }
     .help-launch, .category-trigger { text-rendering: inherit; }
     body.mode-pc .bottom-nav {
-      --category-tracks: repeat(7, minmax(0, 1fr));
-      --dock-type: clamp(17px, 1.33vw, 26px);
+      --category-tracks: repeat(8, minmax(0, 1fr));
+      --dock-type: clamp(14px, 1.47vw, 18px);
     }
     body.mode-pc .bottom-nav :is(.category-trigger, .help-label, .nav-fixed .nav-label, .scroll-control .scroll-label) {
       font-size: var(--dock-type);
@@ -3975,7 +3986,7 @@
     }
     body.mode-pc .bottom-nav .nav-fixed { padding-inline: 5px; }
     body.mode-pc .bottom-nav #desktopHelpLaunch .help-label {
-      font-size: calc(var(--dock-type) + 2px); font-weight: 850;
+      font-weight: 850;
     }
     @media (min-width:1751px) {
       body.mode-pc .bottom-nav {
@@ -3985,7 +3996,6 @@
     }
     @media (min-width:761px) and (max-width:1750px) {
       body.mode-pc .bottom-nav {
-        --dock-type: clamp(15px, 1.65vw, 20px);
         grid-template-columns: 1fr 1.5fr 1fr;
       }
       body.mode-pc .bottom-nav :is(.nav-fixed,.category-trigger,.scroll-control) { min-height: 46px; }
@@ -4010,6 +4020,8 @@
     body.mode-pc .bottom-nav .category-reference-link {
       justify-content: space-between;
       gap: 6px;
+      padding-inline: 7px;
+      font-size: clamp(14px, .93vw, 16px);
     }
     .category-reference-link > span[aria-hidden] { color: #abd4e7; }
     .tablet-device body.mode-pc .bottom-nav {
@@ -4099,7 +4111,7 @@
     /* Keep the entire overlay interactive, but shade only the content below the header. */
     html.tablet-device body.locked .site { opacity: 1; transform: none; }
     html.tablet-device body.locked .site > :not(.site-header) { opacity: .22; }
-    html.tablet-device :is(.gate, #helpModal, #renewalNotice) {
+    html.tablet-device :is(.gate, #helpModal, #renewalNotice, #interviewModal) {
       grid-template-rows: minmax(0, 1fr);
       padding-top: calc(var(--tablet-header-height) + 12px);
     }
@@ -4112,7 +4124,7 @@
       background-image: linear-gradient(#010c15a3, #010c15a3);
       background-color: transparent;
     }
-    html.tablet-device :is(#helpModal, #renewalNotice) .portal-modal-card {
+    html.tablet-device :is(#helpModal, #renewalNotice, #interviewModal) .portal-modal-card {
       max-height: min(100%, 960px);
       box-shadow: 0 12px 24px -16px #0009;
     }
@@ -4124,7 +4136,7 @@
       backdrop-filter: none;
     }
     /* Both the lock and the modal keep the underlying site inert. */
-    html.ipad-device.tablet-device :is(.gate, #helpModal, #renewalNotice) {
+    html.ipad-device.tablet-device :is(.gate, #helpModal, #renewalNotice, #interviewModal) {
       top: var(--tablet-header-height);
       padding-top: 12px;
       background-size: 100% 100%;
@@ -4211,7 +4223,7 @@
         <img src="data:image/jpeg;base64,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" alt="라이언 캐릭터">
         <span class="brand-copy">
           <strong>라이언의 대입 포털</strong>
-          <span>ver.20261127 - 05</span>
+          <span>ver.20261127 - 06</span>
         </span>
       </a>
       <div class="header-actions">
@@ -4313,6 +4325,7 @@
           <button class="category-trigger" type="button" data-category="common" data-qa="desktop-category-trigger" aria-expanded="false" aria-controls="desktopCategoryMega">입시 도구</button>
           <button class="category-trigger" type="button" data-category="documents" data-qa="desktop-category-trigger" aria-expanded="false" aria-controls="desktopCategoryMega">학생부 준비</button>
           <button class="category-trigger" type="button" data-category="early" data-qa="desktop-category-trigger" aria-expanded="false" aria-controls="desktopCategoryMega">수시 결과</button>
+          <button class="category-trigger" type="button" data-category="interview" data-qa="desktop-category-trigger" aria-expanded="false" aria-controls="desktopCategoryMega">면접 준비</button>
           <button class="category-trigger" type="button" data-category="regular" data-qa="desktop-category-trigger" aria-expanded="false" aria-controls="desktopCategoryMega">정시 자료</button>
           <button class="category-trigger" type="button" data-category="medical" data-qa="desktop-category-trigger" aria-expanded="false" aria-controls="desktopCategoryMega">의약학</button>
           <button class="category-trigger" type="button" data-category="legacy" data-qa="desktop-category-trigger" aria-expanded="false" aria-controls="desktopCategoryMega">9등급 자료</button>
@@ -4342,6 +4355,19 @@
               <h2>수시 결과</h2>
               <ul>
                 <li><a class="category-project-link" href="https://seiryu1318.github.io/5admission_Ryan/" target="_blank" rel="noopener noreferrer" data-project="admission-5" data-qa="desktop-project-link">수시모집 입시결과(5등급)</a></li>
+              </ul>
+            </section>
+            <section class="category-column" data-category-column="interview">
+              <h2>면접 준비</h2>
+              <ul>
+                <li>
+                  <button class="category-project-link password-overlay-host" type="button" data-interview-access aria-haspopup="dialog" aria-controls="interviewModal" aria-describedby="desktopInterviewHint">
+                    <span class="password-primary">자체 면접 노션</span>
+                    <span class="password-overlay" id="desktopInterviewHint" role="tooltip" aria-hidden="true">별도 비밀번호 필요</span>
+                  </button>
+                </li>
+                <li><a class="category-project-link category-reference-link" href="https://n.dshs.site/" target="_blank" rel="noopener noreferrer">수시로가<span aria-hidden="true">↗</span></a></li>
+                <li><a class="category-project-link category-reference-link" href="https://www.jinhak.com/jh/high3/univ-entrance-info/ipsi-archive/admission/exams" target="_blank" rel="noopener noreferrer">진학사 대학별고사 자료실<span aria-hidden="true">↗</span></a></li>
               </ul>
             </section>
             <section class="category-column" data-category-column="regular">
@@ -4438,9 +4464,24 @@
               <a class="mobile-category-link" href="https://seiryu1318.github.io/5admission_RyanM/" target="_blank" rel="noopener noreferrer" data-project="admission-5" data-qa="mobile-project-link"><span><strong>수시모집 입시결과(5등급)</strong></span></a>
             </div>
           </details>
-          <details class="mobile-menu-category" data-category="regular">
+          <details class="mobile-menu-category" data-category="interview">
             <summary class="mobile-menu-item mobile-category-toggle" data-qa="mobile-category-trigger" tabindex="0">
               <span class="mobile-menu-number">04</span>
+              <span class="mobile-menu-copy"><span class="mobile-menu-head"><strong>면접 준비</strong></span></span>
+              <span class="mobile-category-chevron" aria-hidden="true"></span>
+            </summary>
+            <div class="mobile-category-panel" data-qa="mobile-category-panel">
+              <button class="mobile-category-link password-overlay-host" type="button" data-interview-access aria-haspopup="dialog" aria-controls="interviewModal" aria-describedby="mobileInterviewHint">
+                <span class="password-primary"><strong>자체 면접 노션</strong></span>
+                <span class="password-overlay" id="mobileInterviewHint" role="tooltip" aria-hidden="true"><span>별도 비밀번호 필요<small>한 번 더 누르면 비밀번호 입력</small></span></span>
+              </button>
+              <a class="mobile-category-link" href="https://n.dshs.site/" target="_blank" rel="noopener noreferrer"><span><strong>수시로가</strong></span></a>
+              <a class="mobile-category-link" href="https://www.jinhak.com/jh/high3/univ-entrance-info/ipsi-archive/admission/exams" target="_blank" rel="noopener noreferrer"><span><strong>진학사 대학별고사 자료실</strong></span></a>
+            </div>
+          </details>
+          <details class="mobile-menu-category" data-category="regular">
+            <summary class="mobile-menu-item mobile-category-toggle" data-qa="mobile-category-trigger" tabindex="0">
+              <span class="mobile-menu-number">05</span>
               <span class="mobile-menu-copy"><span class="mobile-menu-head"><strong>정시 자료</strong></span></span>
               <span class="mobile-category-chevron" aria-hidden="true"></span>
             </summary>
@@ -4451,7 +4492,7 @@
           </details>
           <details class="mobile-menu-category" data-category="medical">
             <summary class="mobile-menu-item mobile-category-toggle" data-qa="mobile-category-trigger" tabindex="0">
-              <span class="mobile-menu-number">05</span>
+              <span class="mobile-menu-number">06</span>
               <span class="mobile-menu-copy"><span class="mobile-menu-head"><strong>의약학</strong></span></span>
               <span class="mobile-category-chevron" aria-hidden="true"></span>
             </summary>
@@ -4461,7 +4502,7 @@
           </details>
           <details class="mobile-menu-category" data-category="legacy">
             <summary class="mobile-menu-item mobile-category-toggle" data-qa="mobile-category-trigger" tabindex="0">
-              <span class="mobile-menu-number">06</span>
+              <span class="mobile-menu-number">07</span>
               <span class="mobile-menu-copy"><span class="mobile-menu-head"><strong>9등급 자료</strong></span></span>
               <span class="mobile-category-chevron" aria-hidden="true"></span>
             </summary>
@@ -4472,7 +4513,7 @@
           </details>
           <details class="mobile-menu-category" data-category="references">
             <summary class="mobile-menu-item mobile-category-toggle" data-qa="mobile-category-trigger" tabindex="0">
-              <span class="mobile-menu-number">07</span>
+              <span class="mobile-menu-number">08</span>
               <span class="mobile-menu-copy"><span class="mobile-menu-head"><strong>참고 사이트</strong></span></span>
               <span class="mobile-category-chevron" aria-hidden="true"></span>
             </summary>
@@ -4550,6 +4591,26 @@
     </section>
   </div>
 
+  <div class="portal-modal" id="interviewModal" role="presentation" aria-hidden="true">
+    <section class="portal-modal-card" role="dialog" aria-modal="true" aria-labelledby="interviewModalTitle">
+      <header class="portal-modal-header">
+        <h2 id="interviewModalTitle">자체 면접 노션</h2>
+      </header>
+      <div class="portal-modal-body">
+        <form id="interviewForm">
+          <label for="interviewPassword" id="interviewPasswordLabel">별도 비밀번호</label>
+          <input id="interviewPassword" type="password" inputmode="numeric" enterkeyhint="go" autocomplete="off" maxlength="8" required aria-describedby="interviewFeedback">
+        </form>
+        <p id="interviewFeedback" role="status"></p>
+        <div class="portal-modal-actions">
+          <button class="portal-modal-button" id="interviewCancel" type="button">닫기</button>
+          <button class="portal-modal-button" id="interviewSubmit" type="submit" form="interviewForm">확인</button>
+          <a class="portal-modal-button" id="interviewOpen" target="_blank" rel="noopener noreferrer" hidden>노션 열기 ↗</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
   <div class="portal-modal" id="helpModal" role="presentation" aria-hidden="true">
     <section class="portal-modal-card" role="dialog" aria-modal="true" aria-labelledby="helpModalTitle">
       <header class="portal-modal-header">
@@ -4569,11 +4630,11 @@
           <ol class="guide-steps">
             <li>
               <p>화면 아래에서 <strong>원하는 분류를 선택하세요.</strong> 마우스를 올리거나 태블릿에서 분류를 누르면 자료 목록이 펼쳐집니다. 키보드로는 Tab을 눌러 이동하세요.</p>
-              <img class="guide-shot" src="./assets/step-find-pc-1.webp?v=20261127-03" width="1100" height="72" loading="lazy" decoding="async" alt="PC 화면 아래에 나란히 놓인 입시 도구, 학생부 준비, 참고 사이트 등 일곱 메뉴">
+              <img class="guide-shot" src="./assets/step-find-pc-1.webp?v=20261127-06" width="1100" height="73" loading="lazy" decoding="async" alt="PC 화면 아래에 수시 결과와 면접 준비를 포함한 여덟 가지 분류 메뉴">
             </li>
             <li>
               <p>펼쳐진 메뉴에서 <strong>자료 이름을 클릭</strong>하면 새 탭에서 열립니다.</p>
-              <img class="guide-shot" src="./assets/step-find-pc-2.webp?v=20261127-04" width="540" height="659" loading="lazy" decoding="async" alt="PC 참고 사이트 메뉴를 펼치고 쎈진학 나침판 링크를 가리킨 화면">
+              <img class="guide-shot" src="./assets/step-find-pc-2.webp?v=20261127-06" width="540" height="512" loading="lazy" decoding="async" alt="PC 면접 준비 메뉴를 펼치고 수시로가 링크를 가리킨 화면">
             </li>
             <li>
               <p>오른쪽 아래 <strong>업데이트 내역</strong>을 누르면 어떤 자료가 언제 바뀌었는지 볼 수 있습니다.</p>
@@ -4585,11 +4646,11 @@
           <ol class="guide-steps">
             <li>
               <p>첫 화면에서 <strong>원하는 분류를 누르세요.</strong> 아래로 자료 목록이 펼쳐집니다.</p>
-              <img class="guide-shot" src="./assets/step-basic-1.webp?v=20261127-03" width="764" height="284" loading="lazy" decoding="async" alt="9등급 자료와 참고 사이트 오른쪽에 아래쪽 화살표가 보이는 모바일 메뉴">
+              <img class="guide-shot" src="./assets/step-basic-1.webp?v=20261127-06" width="748" height="278" loading="lazy" decoding="async" alt="수시 결과 아래에 면접 준비 메뉴가 놓인 모바일 화면">
             </li>
             <li>
               <p>목록에서 <strong>자료 이름을 누르면</strong> 새 탭에서 열립니다.</p>
-              <img class="guide-shot" src="./assets/step-basic-2.webp?v=20261127-03" width="764" height="688" loading="lazy" decoding="async" alt="모바일 참고 사이트를 눌러 다섯 링크를 펼친 화면">
+              <img class="guide-shot" src="./assets/step-basic-2.webp?v=20261127-06" width="748" height="466" loading="lazy" decoding="async" alt="모바일 면접 준비 메뉴에서 자료 세 개를 펼친 화면">
             </li>
             <li>
               <p>메뉴 끝까지 내리면 <strong>업데이트 내역</strong>이 펼쳐집니다. 위로 올리면 다시 메뉴가 보입니다.</p>
@@ -4686,7 +4747,7 @@
 
       if ("serviceWorker" in navigator && supportsPwaInstall) {
         window.addEventListener("load", () => {
-          navigator.serviceWorker.register("./service-worker.js?v=20261127-05", {
+          navigator.serviceWorker.register("./service-worker.js?v=20261127-06", {
             scope: "./",
             updateViaCache: "none"
           }).then((registration) => registration.update()).catch(() => {});
@@ -5093,6 +5154,7 @@
         persistentStorage.remove(ACCESS_KEY);
         window.clearTimeout(accessExpiryTimer);
         body.classList.add("locked");
+        if (interviewModal.classList.contains("is-open")) closeInterviewAccess(false);
         document.querySelector(".site").inert = true;
         document.documentElement.classList.add("portal-locked");
         gate.classList.remove("hidden", "shake");
@@ -5321,7 +5383,8 @@
         }, 0);
       });
       document.addEventListener("pointerdown", (event) => {
-        if (!pinnedCategoryTrigger || categoryLauncher?.contains(event.target) || categoryMega?.contains(event.target)) return;
+        if (body.classList.contains("modal-open") || !pinnedCategoryTrigger ||
+            categoryLauncher?.contains(event.target) || categoryMega?.contains(event.target)) return;
         setMegaOpen(false);
       });
       document.addEventListener("keydown", (event) => {
@@ -5390,6 +5453,88 @@
           mobilePasswordHintTimer = window.setTimeout(() => setPasswordHint(host, false), 2600);
         });
       });
+
+      const interviewModal = document.getElementById("interviewModal");
+      const interviewForm = document.getElementById("interviewForm");
+      const interviewPassword = document.getElementById("interviewPassword");
+      const interviewFeedback = document.getElementById("interviewFeedback");
+      const interviewSubmit = document.getElementById("interviewSubmit");
+      const interviewOpen = document.getElementById("interviewOpen");
+      const interviewCancel = document.getElementById("interviewCancel");
+      // The payload contains a 16-byte salt, a 12-byte IV, and an AES-GCM ciphertext with tag.
+      const encryptedInterviewLink = "fbKHAYzUS4tfRSHvO1iFxvj7gZdXUjSUToeMSOalPCkE1pGzPRgEvTzubFFppxvQ7H1UTZNTpS+A6M4UX8pjGODkPZFTf6MR3SoCDiwT+/GstKwpWOcGSW17vgZ3aKEuwu4P6nvktuUEWNIiaJiEPUu2jI1CSg==";
+      let interviewAttempt = 0;
+
+      function closeInterviewAccess(restoreFocus = true) {
+        interviewAttempt++;
+        closePortalModal(interviewModal, restoreFocus);
+        interviewForm.reset();
+        interviewForm.hidden = false;
+        interviewFeedback.textContent = "";
+        interviewSubmit.hidden = false;
+        interviewSubmit.disabled = false;
+        interviewOpen.hidden = true;
+        interviewOpen.removeAttribute("href");
+      }
+
+      document.querySelectorAll("[data-interview-access]").forEach((trigger) => {
+        trigger.addEventListener("click", (event) => {
+          if (event.defaultPrevented || body.classList.contains("locked")) return;
+          if (body.classList.contains("mode-pc")) {
+            openCategory(categoryLauncher.querySelector('[data-category="interview"]'), true);
+          }
+          trigger.focus({ preventScroll: true });
+          openPortalModal(interviewModal, interviewPassword);
+        });
+      });
+
+      interviewForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (interviewSubmit.disabled || interviewForm.hidden) return;
+        if (!window.crypto?.subtle) {
+          interviewFeedback.textContent = "보안 연결로 접속한 뒤 다시 시도해 주세요.";
+          return;
+        }
+        const attempt = ++interviewAttempt;
+        const password = interviewPassword.value.trim();
+        interviewSubmit.disabled = true;
+        interviewFeedback.textContent = "비밀번호를 확인하고 있습니다.";
+        try {
+          const payload = Uint8Array.from(atob(encryptedInterviewLink), (character) => character.charCodeAt(0));
+          const passwordKey = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveKey"]);
+          const key = await crypto.subtle.deriveKey(
+            { name: "PBKDF2", salt: payload.subarray(0, 16), iterations: 600000, hash: "SHA-256" },
+            passwordKey, { name: "AES-GCM", length: 256 }, false, ["decrypt"]
+          );
+          const address = await crypto.subtle.decrypt({ name: "AES-GCM", iv: payload.subarray(16, 28) }, key, payload.subarray(28));
+          if (attempt !== interviewAttempt) return;
+          interviewForm.reset();
+          interviewForm.hidden = true;
+          interviewSubmit.hidden = true;
+          interviewFeedback.textContent = "비밀번호를 확인했습니다.";
+          interviewOpen.href = new TextDecoder().decode(address);
+          interviewOpen.hidden = false;
+          interviewOpen.focus();
+        } catch {
+          if (attempt !== interviewAttempt) return;
+          interviewFeedback.textContent = "비밀번호가 맞지 않습니다.";
+          interviewPassword.select();
+          interviewPassword.focus();
+        } finally {
+          if (attempt === interviewAttempt) interviewSubmit.disabled = false;
+        }
+      });
+
+      interviewCancel.addEventListener("click", () => closeInterviewAccess());
+      interviewModal.addEventListener("click", (event) => {
+        if (event.target === interviewModal) closeInterviewAccess();
+      });
+      interviewModal.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        event.stopPropagation();
+        closeInterviewAccess();
+      });
+      interviewOpen.addEventListener("click", () => window.setTimeout(() => closeInterviewAccess(), 0));
 
       document.addEventListener("pointerdown", (event) => {
         if (event.target.closest?.(".password-overlay-host")) return;
@@ -5496,6 +5641,6 @@
       syncScrollControl();
     })();
   </script>
-  <script src="./project-dots.js?v=20261127-05" defer></script>
+  <script src="./project-dots.js?v=20261127-06" defer></script>
 </body>
 </html>
